@@ -17,7 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+/*
 Route::get('hello', function () {
-    return '<html><body><h1>hello</h1><p>sanpple page</p></body></html>';
+    return view('hello');
 });
+*/
+
+Route::get('hello', 'App\Http\Controllers\HelloController@index');
+
+
