@@ -9,5 +9,7 @@
 <body>
     <h1>hello</h1>
     <pre>{{$msg}}</pre>
+    <pre>{{$id}}</pre>
+    <pre>{{$tmp}}</pre>
 </body>
 </html>
