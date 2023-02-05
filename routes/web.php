@@ -23,6 +23,13 @@ Route::get('hello', function () {
 });
 */
 
-Route::get('/{id}/{tmp}', 'App\Http\Controllers\HelloController@index');
 
+//ルートパラメータを使用する場合。**?はパラメータ省略化の
+//Route::get('/{id?}/{tmp?}', 'App\Http\Controllers\HelloController@index');
 
+//クエリ文字列を使用する場合
+Route::get('/', 'App\Http\Controllers\HelloController@index');
+
+Route::get('/create', 'App\Http\Controllers\HelloController@create');
+
+Route::post('/', 'App\Http\Controllers\HelloController@post');
