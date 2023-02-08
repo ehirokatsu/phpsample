@@ -33,3 +33,7 @@ Route::get('/', 'App\Http\Controllers\HelloController@index');
 Route::get('/create', 'App\Http\Controllers\HelloController@create');
 
 Route::post('/', 'App\Http\Controllers\HelloController@post');
+
+Route::get('section', function () {
+    return view('section');
+});
