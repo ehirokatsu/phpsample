@@ -2,12 +2,6 @@
 
 @section('title', 'Index')
 
-@section('menubar')
-   @parent
-   インデックスページ
-   <p>あいうえお</p> 
-@endsection
-
 @section('content')
    <p>ここが本文のコンテンツです。</p>
    <p>必要なだけ記述できます。</p>

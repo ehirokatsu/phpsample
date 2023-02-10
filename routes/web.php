@@ -37,3 +37,7 @@ Route::post('/', 'App\Http\Controllers\HelloController@post');
 Route::get('section', function () {
     return view('section');
 });
+
+Route::get('section2', function () {
+    return view('section2');
+});
