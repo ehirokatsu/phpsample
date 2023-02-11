@@ -35,9 +35,14 @@ Route::get('/create', 'App\Http\Controllers\HelloController@create');
 Route::post('/', 'App\Http\Controllers\HelloController@post');
 
 Route::get('section', function () {
-    return view('section');
+    return view('section', ['message'=>'Hello!']);
 });
 
 Route::get('section2', function () {
-    return view('section2');
+    $data = [
+        ['name'=>'山田たろう', 'mail'=>'taro@yamada'],
+        ['name'=>'田中はなこ', 'mail'=>'hanako@flower'],
+        ['name'=>'鈴木さちこ', 'mail'=>'sachico@happy']
+    ];
+    return view('section2', ['data'=>$data]);
 });
