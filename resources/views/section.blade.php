@@ -1,6 +1,6 @@
 @extends('layouts.helloapp')
 
-@section('title', 'Index')
+@section('title', 'section（ビューコンポーザ）テスト')
 
 @section('content')
    <p>ここが本文のコンテンツです。</p>

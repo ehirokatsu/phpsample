@@ -23,7 +23,7 @@
    @yield('footer')
    </div>
    @section('test')
-   <h2>テストテスト</h2>
+   <h2>showテスト</h2>
    @show
 </body>
 </html>

@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Middleware\HelloMiddleware;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,11 +39,16 @@ Route::get('section', function () {
     return view('section', ['message'=>'Hello!']);
 });
 
-Route::get('section2', function () {
+Route::get('include-each', function () {
     $data = [
         ['name'=>'山田たろう', 'mail'=>'taro@yamada'],
         ['name'=>'田中はなこ', 'mail'=>'hanako@flower'],
         ['name'=>'鈴木さちこ', 'mail'=>'sachico@happy']
     ];
-    return view('section2', ['data'=>$data]);
+    return view('include-each', ['data'=>$data]);
 });
+
+
+Route::get('helloMiddle', function (Request $request) {
+    return view('helloMiddle', ['data'=>$request->data]);
+})->middleware(HelloMiddleware::class);

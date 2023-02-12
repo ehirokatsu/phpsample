@@ -1,6 +1,6 @@
 @extends('layouts.helloapp')
 
-@section('title', 'Other')
+@section('title', 'include-eachのテスト')
 
 @section('content')
    <p>ここは別のページです</p>
@@ -18,5 +18,5 @@ copyright 2022 tuyano2.
 
 @section('test')
 @parent
-ttttt
+include-eachのテストページ
 @endsection
