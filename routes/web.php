@@ -52,3 +52,8 @@ Route::get('include-each', function () {
 Route::get('helloMiddle', function (Request $request) {
     return view('helloMiddle', ['data'=>$request->data]);
 })->middleware(HelloMiddleware::class);
+
+Route::get('/validator', function () {
+    return view('validator', ['msg'=>'フォームを入力：']);
+});
+Route::post('/validator', 'App\Http\Controllers\HelloController@validator');

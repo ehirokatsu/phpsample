@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Validator;
 
 class HelloController extends Controller
 {
@@ -42,5 +43,20 @@ class HelloController extends Controller
             'txt_isset'=>$request->txt_isset,
         ];
         return view('hello', $data);
+    }
+
+    public function validator(Request $request)
+    {
+    $validator = Validator::make($request->all(), [
+        'name' => 'required',
+        'mail' => 'email',
+        'age' => 'numeric|between:0,150',
+    ]);
+    if ($validator->fails()) {
+        return redirect('/validator')
+                    ->withErrors($validator)
+                    ->withInput();
+    }
+    return view('validator', ['msg'=>'正しく入力されました！']);
     }
 }
