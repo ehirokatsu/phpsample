@@ -35,10 +35,12 @@ Route::get('/create', 'App\Http\Controllers\HelloController@create');
 
 Route::post('/', 'App\Http\Controllers\HelloController@post');
 
+//extend,sectionディレクティブ
 Route::get('section', function () {
     return view('section', ['message'=>'Hello!']);
 });
 
+//include,eachディレクティブ
 Route::get('include-each', function () {
     $data = [
         ['name'=>'山田たろう', 'mail'=>'taro@yamada'],
@@ -49,11 +51,29 @@ Route::get('include-each', function () {
 });
 
 
+//ミドルウェア
 Route::get('helloMiddle', function (Request $request) {
     return view('helloMiddle', ['data'=>$request->data]);
 })->middleware(HelloMiddleware::class);
 
+
+//バリデータ
 Route::get('/validator', function () {
     return view('validator', ['msg'=>'フォームを入力：']);
 });
 Route::post('/validator', 'App\Http\Controllers\HelloController@validator');
+
+//DBクラス
+Route::get('/dbclass', 'App\Http\Controllers\HelloController@dbclass');
+
+//insert
+Route::get('/add', 'App\Http\Controllers\HelloController@add');
+Route::post('/add', 'App\Http\Controllers\HelloController@create');
+
+//update
+Route::get('/edit', 'App\Http\Controllers\HelloController@edit');
+Route::post('/edit', 'App\Http\Controllers\HelloController@update');
+
+//delete
+Route::get('/del', 'App\Http\Controllers\HelloController@del');
+Route::post('/del', 'App\Http\Controllers\HelloController@remove');
