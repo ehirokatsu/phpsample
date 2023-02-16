@@ -77,3 +77,12 @@ Route::post('/edit', 'App\Http\Controllers\HelloController@update');
 //delete
 Route::get('/del', 'App\Http\Controllers\HelloController@del');
 Route::post('/del', 'App\Http\Controllers\HelloController@remove');
+
+//search
+Route::get('/find', 'App\Http\Controllers\HelloController@find');
+Route::post('/find', 'App\Http\Controllers\HelloController@search');
+
+Route::get('board', 'App\Http\Controllers\BoardController@index');
+
+Route::get('board/add', 'App\Http\Controllers\BoardController@add');
+Route::post('board/add', 'App\Http\Controllers\BoardController@create');

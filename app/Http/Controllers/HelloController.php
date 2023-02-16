@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Validator;
 use Illuminate\Support\Facades\DB;
+use App\Models\Person;
 
 class HelloController extends Controller
 {
@@ -68,8 +69,12 @@ class HelloController extends Controller
         //$items = DB::select('select * from people');
         
         //クエリビルダ
-        $items = DB::table('people')->get();
+        //$items = DB::table('people')->get();
 
+        //Eloquent
+        $items = Person::all();
+
+        //共通
         return view('dbclass', ['items' => $items]);
     }
 
@@ -82,6 +87,7 @@ class HelloController extends Controller
     //insert実行
     public function create(Request $request)
     {
+        //DBクラス、クエリビルダで使用
         $param = [
             'name' => $request->name,
             'mail' => $request->mail,
@@ -92,31 +98,48 @@ class HelloController extends Controller
         //DB::insert('insert into people (name, mail, age) values (:name, :mail, :age)', $param);
 
         //クエリビルダ
-        DB::table('people')->insert($param);
+        //DB::table('people')->insert($param);
 
+        //Eloquent
+        $person = new Person();
+        $person->name = $request->name;
+        $person->mail = $request->mail;
+        $person->age = $request->age;
+        $person->save();
 
+        //共通
         return redirect('/dbclass');
     }
 
     //update用ビュー
     public function edit(Request $request)
     {
-       $param = ['id' => $request->id];
+       
 
         //DBクラス
-        //$item = DB::select('select * from people where id = :id', $param);
-        //return view('edit', ['form' => $item[0]]);
-        
+        /*
+        $param = ['id' => $request->id];
+        $item = DB::select('select * from people where id = :id', $param);
+        return view('edit', ['form' => $item[0]]);
+        */
+
         //クエリビルダ
+        /*
         $item = DB::table('people')
         ->where('id', $request->id)
         ->first();
         return view('edit', ['form' => $item]);
+        */
+
+        //Eloquent
+        $person = Person::find($request->id);
+        return view('edit', ['form' => $person]);
     }
     
     //update実行
     public function update(Request $request)
     {
+        //DBクラス、クエリビルダで使用
        $param = [
            'id' => $request->id,
            'name' => $request->name,
@@ -127,42 +150,78 @@ class HelloController extends Controller
        //DBクラス
        //DB::update('update people set name =:name, mail = :mail, age = :age where id = :id', $param);
 
-       //クエリビルダ
-       DB::table('people')
-       ->where('id', $request->id)
-       ->update($param);
-       return redirect('/dbclass');
+        //クエリビルダ
+        DB::table('people')
+        ->where('id', $request->id)
+        ->update($param);
+
+        //Eloquent
+        $person = Person::find($request->id);
+        $person->name = $request->name;
+        $person->mail = $request->mail;
+        $person->age = $request->age;
+        $person->save();
+
+        //共通
+        return redirect('/dbclass');
     }
 
     //削除用ビュー
     public function del(Request $request)
     {
-        $param = ['id' => $request->id];
-
         //DBクラス
-        //$item = DB::select('select * from people where id = :id', $param);
-        //return view('del', ['form' => $item[0]]);
-       
+        /*
+        $param = ['id' => $request->id];
+        $item = DB::select('select * from people where id = :id', $param);
+        return view('del', ['form' => $item[0]]);
+        */
+
         //クエリビルダ
+        /*
         $item = DB::table('people')
         ->where('id', $request->id)->first();
-
         return view('del', ['form' => $item]);
+        */
+
+        //Eloquent
+        $person = Person::find($request->id);
+        return view('del', ['form' => $person]);
+
+        
     }
 
     //削除実行
     public function remove(Request $request)
     {
-        $param = ['id' => $request->id];
-
+    
         //DBクラス
-        //DB::delete('delete from people where id = :id', $param);
- 
+        /*
+        $param = ['id' => $request->id];
+        DB::delete('delete from people where id = :id', $param);
+        */
+
         //クエリビルダ
+        /*
         DB::table('people')
         ->where('id', $request->id)->delete();
+        */
 
+        //Eloquent
+        Person::find($request->id)->delete();
+
+        //共通
         return redirect('/dbclass');
+    }
+    public function find(Request $request)
+    {
+        return view('find',['input' => '']);
+    }
+
+    public function search(Request $request)
+    {
+        $item = Person::find($request->input);
+        $param = ['input' => $request->input, 'item' => $item];
+        return view('find', $param);
     }
 
 }

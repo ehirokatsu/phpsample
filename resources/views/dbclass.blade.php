@@ -11,9 +11,25 @@
            <td>{{$item->name}}</td>
            <td>{{$item->mail}}</td>
            <td>{{$item->age}}</td>
+           <td><a href="/edit?id={{ $item->id }}" class="">編集</a></td>
+           <td><a href="/del?id={{ $item->id }}" class="">削除</a></td>
        </tr>
    @endforeach
    </table>
+   <a href="/add" class="">追加</a>
+   <table>
+   <tr><th>Person</th><th>Board</th></tr>
+   @foreach ($items as $item)
+       <tr>
+           <td>{{$item->getData()}}</td>
+           <td>@if ($item->board != null)
+                   {{$item->board->getData()}}
+               @endif
+           </td>
+       </tr>
+   @endforeach
+   </table>
+
 @endsection
 
 @section('footer')
