@@ -212,14 +212,31 @@ class HelloController extends Controller
         //共通
         return redirect('/dbclass');
     }
+
+    //検索用ビュー
     public function find(Request $request)
     {
         return view('find',['input' => '']);
     }
 
+    //検索実行
     public function search(Request $request)
     {
-        $item = Person::find($request->input);
+        //DBクラス
+        $param = ['input' => $request->input];
+        $items = DB::select('select * from people where id = :input', $param);
+        //$items[0]としないと配列で渡されてしまう
+        $param = ['input' => $request->input, 'item' => $items[0]];
+
+        //クエリビルダ
+        $item = DB::table('people')->where('id', $request->input)->first();
+        //var_dump($item);
+        //exit();
+
+        //Eloquent
+        //$item = Person::find($request->input);
+
+
         $param = ['input' => $request->input, 'item' => $item];
         return view('find', $param);
     }

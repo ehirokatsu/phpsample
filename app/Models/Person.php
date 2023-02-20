@@ -21,8 +21,8 @@ class Person extends Model
     {
        return $this->id . ': ' . $this->name . ' (' . $this->age . ')';
     }
-    public function board()
+    public function boards()
     {
-        return $this->hasOne('App\Models\Board');
+        return $this->hasMany('App\Models\Board');
     }
 }

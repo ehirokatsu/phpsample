@@ -8,13 +8,16 @@
 @endsection
 
 @section('content')
-   <table>
-   <tr><th>Data</th></tr>
+<table>
+   <tr><th>Id</th><th>Name</th><th>Mail</th><th>Age</th><th>Title</th></tr>
    @foreach ($items as $item)
        <tr>
-           <td>{{$item->getData()}}</td>
-           <!--$item->person->getData()としてpersonモデルのgetDataも使用可能-->
-       </tr>
+           <td>{{$item->id}}</td>
+           <td>{{$item->name}}</td>
+           <td>{{$item->mail}}</td>
+           <td>{{$item->age}}</td>
+           <td>{{$item->title}}</td>
+                </tr>
    @endforeach
    </table>
 @endsection

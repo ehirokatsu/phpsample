@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Board;
+use Illuminate\Support\Facades\DB;
 
 class BoardController extends Controller
 {
     public function index(Request $request)
     {
-        $items = Board::all();
+        //$items = Board::all();
+
+        //personをBoardモデルで定義しておく必要あり
+        $items = Board::with('person')->get();
         return view('board.index', ['items' => $items]);
     }
 
@@ -27,4 +31,26 @@ class BoardController extends Controller
         $board->fill($form)->save();
         return redirect('/board');
     }
+
+    public function board_dbclass(Request $request)
+    {
+        //DBクラス
+        //$items = DB::select('select * from people A, boards B where A.id = B.person_id');
+        
+        //クエリビルダ
+        $items = DB::table('people')
+        ->join('boards', 'people.id', '=', 'boards.person_id')
+        ->get();
+
+        return view('board.board_dbclass', ['items' => $items]);
+    }
+    public function board_query(Request $request)
+    {
+        //$items = Board::all();
+
+        //personをBoardモデルで定義しておく必要あり
+        $items = Board::with('person')->get();
+        return view('board.board_query', ['items' => $items]);
+    }
+
 }

@@ -11,13 +11,21 @@ class Board extends Model
     protected $guarded = array('id');
   
     public static $rules = array(
-       'person_id' => 'required',
-       'title' => 'required',
-       'message' => 'required'
-   );
+        'person_id' => 'required',
+        'title' => 'required',
+        'message' => 'required'
+    );
 
-   public function getData()
-   {
-       return $this->id . ': ' . $this->title;
-   }
+    public function getData()
+    {
+        //$this->personで、personモデルのメンバ変数も参照できる
+        return $this->id . ': ' . $this->title . ' (' 
+        . $this->person->name . ')';
+    }
+
+    public function person()
+    {
+        return $this->belongsTo('App\Models\Person');
+    }
+
 }

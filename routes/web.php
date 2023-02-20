@@ -86,3 +86,8 @@ Route::get('board', 'App\Http\Controllers\BoardController@index');
 
 Route::get('board/add', 'App\Http\Controllers\BoardController@add');
 Route::post('board/add', 'App\Http\Controllers\BoardController@create');
+
+
+Route::get('board_dbclass', 'App\Http\Controllers\BoardController@board_dbclass');
+Route::get('board_query', 'App\Http\Controllers\BoardController@board_query');
+
