@@ -63,8 +63,8 @@ Route::get('/validator', function () {
 });
 Route::post('/validator', 'App\Http\Controllers\HelloController@validator');
 
-//DBクラス
-Route::get('/dbclass', 'App\Http\Controllers\HelloController@dbclass');
+//select
+Route::get('/index_db', 'App\Http\Controllers\HelloController@index_db');
 
 //insert
 Route::get('/add', 'App\Http\Controllers\HelloController@add');
@@ -82,12 +82,11 @@ Route::post('/del', 'App\Http\Controllers\HelloController@remove');
 Route::get('/find', 'App\Http\Controllers\HelloController@find');
 Route::post('/find', 'App\Http\Controllers\HelloController@search');
 
+//Eloquentで結合
 Route::get('board', 'App\Http\Controllers\BoardController@index');
 
 Route::get('board/add', 'App\Http\Controllers\BoardController@add');
 Route::post('board/add', 'App\Http\Controllers\BoardController@create');
 
-
-Route::get('board_dbclass', 'App\Http\Controllers\BoardController@board_dbclass');
-Route::get('board_query', 'App\Http\Controllers\BoardController@board_query');
-
+//DBクラス、クエリビルダで結合
+Route::get('board/index_dbclass', 'App\Http\Controllers\BoardController@index_dbclass');

@@ -32,7 +32,7 @@ class BoardController extends Controller
         return redirect('/board');
     }
 
-    public function board_dbclass(Request $request)
+    public function index_dbclass(Request $request)
     {
         //DBクラス
         //$items = DB::select('select * from people A, boards B where A.id = B.person_id');
@@ -42,15 +42,6 @@ class BoardController extends Controller
         ->join('boards', 'people.id', '=', 'boards.person_id')
         ->get();
 
-        return view('board.board_dbclass', ['items' => $items]);
+        return view('board.index_dbclass', ['items' => $items]);
     }
-    public function board_query(Request $request)
-    {
-        //$items = Board::all();
-
-        //personをBoardモデルで定義しておく必要あり
-        $items = Board::with('person')->get();
-        return view('board.board_query', ['items' => $items]);
-    }
-
 }

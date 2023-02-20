@@ -63,7 +63,7 @@ class HelloController extends Controller
     }
 
     //テーブル表示
-    public function dbclass(Request $request)
+    public function index_db(Request $request)
     {
         //DBクラス
         //$items = DB::select('select * from people');
@@ -75,7 +75,7 @@ class HelloController extends Controller
         $items = Person::all();
 
         //共通
-        return view('dbclass', ['items' => $items]);
+        return view('index_db', ['items' => $items]);
     }
 
     //insert用ビュー
@@ -108,7 +108,7 @@ class HelloController extends Controller
         $person->save();
 
         //共通
-        return redirect('/dbclass');
+        return redirect('/index_db');
     }
 
     //update用ビュー
@@ -163,7 +163,7 @@ class HelloController extends Controller
         $person->save();
 
         //共通
-        return redirect('/dbclass');
+        return redirect('/index_db');
     }
 
     //削除用ビュー
@@ -210,7 +210,7 @@ class HelloController extends Controller
         Person::find($request->id)->delete();
 
         //共通
-        return redirect('/dbclass');
+        return redirect('/index_db');
     }
 
     //検索用ビュー
