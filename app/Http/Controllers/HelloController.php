@@ -7,18 +7,58 @@ use Illuminate\Http\Response;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use App\Models\Person;
+use App\Http\Myclass\Util;
+use App\Http\Services\HelloService;
 
 class HelloController extends Controller
 {
+    protected $helloService;
+
+    public function __construct(HelloService $helloService)//use必須
+    {
+        $this->helloService = $helloService;
+    }
+
+
     //
     public function index(Request $request,Response $response,$id=0, $tmp=1)
     {
+
+        $util = new Util();
+        //$tmp = Util::test();
+        $tmp = $util->test();
+
+        //newでインスタンス生成。bind内は呼ばれない
+        //$helloService = new HelloService();
+        //var_dump($helloService->echo());
+
+        //app系でインスタンス生成。bind内は呼ばれる。以下は同義
+        //$helloService = app()->make(\App\Http\Services\HelloService::class);//useなし
+        //$helloService = app()->make('App\Http\Services\HelloService');//useなし
+        //$helloService = app(\App\Http\Services\HelloService::class);//useなし
+        //$helloService = app()->make(HelloService::class);//use必須
+        //$helloService = app(HelloService::class);//use必須
+
+        //bindをラベル指定。registerでもラベル指定にする
+        //$helloService = app()->make('HelloService');
+        //$helloService = app('HelloService');
+
+
+        //var_dump($helloService->echo());
+        //var_dump($helloService->foo);
+
+        //コンストラクタインジェクション時に使用
+        var_dump($this->helloService->echo());
+        var_dump($this->helloService->foo);
+        //var_dump($this->helloService->echo2());
+        exit(1);
+
         $data = [
             'req'=>$request,
             'res'=>$response,
             //'id'=>$id,
             //'tmp'=>$tmp,
-            'id'=>$request->id,
+            'id'=>$request->id*$tmp,
             'tmp'=>$request->tmp,
             //'txt_empty'=>'',
         ];

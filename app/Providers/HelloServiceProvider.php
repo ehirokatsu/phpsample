@@ -12,9 +12,15 @@ class HelloServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    
     public function register()
     {
-        //
+        /*
+        $this->app->bind('Hello',function($app){
+            return new HelloService();
+        });
+        */
+        $this->app->bind('Hello::class','App\Http\Services\HelloService');
     }
 
     /**
