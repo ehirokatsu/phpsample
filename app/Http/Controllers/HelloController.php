@@ -14,6 +14,7 @@ class HelloController extends Controller
 {
     protected $helloService;
 
+    //コンストラクタインジェクション。use必須
     public function __construct(HelloService $helloService)//use必須
     {
         $this->helloService = $helloService;
@@ -30,7 +31,6 @@ class HelloController extends Controller
 
         //newでインスタンス生成。bind内は呼ばれない
         //$helloService = new HelloService();
-        //var_dump($helloService->echo());
 
         //app系でインスタンス生成。bind内は呼ばれる。以下は同義
         //$helloService = app()->make(\App\Http\Services\HelloService::class);//useなし
@@ -48,10 +48,10 @@ class HelloController extends Controller
         //var_dump($helloService->foo);
 
         //コンストラクタインジェクション時に使用
-        var_dump($this->helloService->echo());
-        var_dump($this->helloService->foo);
+        //var_dump($this->helloService->echo());
+        //var_dump($this->helloService->foo);
         //var_dump($this->helloService->echo2());
-        exit(1);
+        //exit(1);
 
         $data = [
             'req'=>$request,

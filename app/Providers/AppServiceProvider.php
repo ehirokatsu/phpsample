@@ -21,10 +21,10 @@ class AppServiceProvider extends ServiceProvider
 
         //$this->app->bind(Hello::class,'App\Http\Services\HelloService');
 
-        //use無しでおk。makeで呼び出すならこれで。
+        //use無し。makeで呼び出すならこれで良い。
         //$this->app->bind('HelloService', function(){
     
-        //use必須。コンストラクタインジェクションではこっち
+        //use必須。コンストラクタインジェクションを使用するならこっち。
         $this->app->bind(HelloService::class, function(){
     
             $class = new \App\Http\Services\HelloService();
