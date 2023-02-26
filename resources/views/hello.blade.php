@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
     <h1>hello</h1>
@@ -48,5 +49,6 @@
     @else
     <p>未定義なのでテキスト入力してください。</p>
     @endisset
+    <div class='test'>あいうえお</div>
 </body>
 </html>
