@@ -25,6 +25,7 @@ Route::get('hello', function () {
 */
 
 
+
 //ルートパラメータを使用する場合。**?はパラメータ省略化の
 //Route::get('/{id?}/{tmp?}', 'App\Http\Controllers\HelloController@index');
 
