@@ -1,21 +1,92 @@
-/*indexページでの画像の表示範囲*/
-.img-index {
-    max-width: 100%;
-    max-height: 500px;
-   } 
-  
-  /*showページでの画像の表示範囲*/
-  .img-show {
-    max-width: 100%;
-    max-height: 800px;
-   } 
-   
-  /*create、editページでの画像の表示範囲*/
-   .img-create {
-    max-width: 100%;    
-    max-height: 500px;
-   } 
+p{
+  background-color: aqua;
+  /*text-align: center;*/
+  border: 1px solid #000;
+}
 
-   .test {
-    font-size:100px;
-   } 
+h1{
+  background-color:bisque;
+}
+.container{
+  display: flex;
+  /*border: 1px solid #000;*/
+  justify-content: center;
+  align-items: center;
+}
+.box{
+  flex: 1;
+  /*border: 1px solid #000;*/
+}
+.box2{
+ flex: 3;
+}
+
+label{
+  background-color:rgb(184, 236, 220);
+}
+
+body {
+  color: #060606;
+  font-size: 16px;
+  font-family: sans-serif;
+}
+a {
+  text-decoration: none;
+  color: #060606;
+}
+body, header, footer, main, section, div, p, li, dt, dd, a {
+  margin: 10px;
+  padding: 10px;
+}
+header, footer, main, section{
+  border: 2px solid #f00;
+}
+div, p {
+  border: 1px solid #00f;
+}
+li, dt, dd, a {
+  border: 1px dotted #0F0;
+}
+
+.header {
+
+}
+
+.header__wrap {
+  width: 85%;
+  margin: auto;
+  display: flex;/*テキスト、div要素を横並びに配置する*/
+  justify-content: space-between;/*テキスト、div要素を等間隔で配置する*/
+  align-items: center;/*テキスト等を上下中央にする*/
+}
+
+.header__logo {
+  width: 54px;
+  height: 76px;
+}
+
+.header__menu {
+  display: flex;
+}
+
+.header__menu li {
+  width: 100px;
+}
+
+.main {
+
+}
+
+.footer {
+  padding: 90px 0 70px;
+}
+
+.footer__logo {
+  width: 100px;
+  margin: 0 auto;/*中央に配置する*/
+}
+
+.footer__copyright {
+  margin-top: 30px;
+  text-align: center;
+}

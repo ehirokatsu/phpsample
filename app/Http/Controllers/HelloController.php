@@ -63,7 +63,8 @@ class HelloController extends Controller
             //'txt_empty'=>'',
         ];
         //$data = $request;
-        return view('hello', $data);
+        //return view('hello', $data);
+        return view('index');
     }
 /*
     public function create()
