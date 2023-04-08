@@ -1,4 +1,4 @@
-/*
+
 
 label{
   background-color:rgb(184, 236, 220);
@@ -26,7 +26,7 @@ div, p {
 li, dt, dd, a {
   border: 1px dotted #0F0;
 }
-*/
+
 .header {
 
 }
@@ -40,11 +40,13 @@ li, dt, dd, a {
 }
 
 .header__logo {
-  width: 54px;
-  height: 76px;
+  width: 100px;
+  height: 100px;
+  
 }
 .header__logo a {
   display: block;
+  box-shadow: 6px 6px 10px  #00f;
 }
 
 
@@ -57,10 +59,17 @@ li, dt, dd, a {
   width: 80px;
   list-style: none;
 }
+
 .header__menu ul li a {
   display: block;
   width: 100%;
   text-align: center;
+}
+.header__menu .active a,
+.header__menu a:hover {
+  background-color: #d03c56;
+  color: #fff;
+  transition: 0.15s;
 }
 
 .main {

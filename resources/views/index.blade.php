@@ -13,14 +13,14 @@
     <div class="header__logo">
       <a href=""><img src="{{asset('storage/header_logo.svg')}}" alt=""></a>
     </div>
-    <div class="header__menu">
+    <nav class="header__menu">
       <ul>
-        <li><a href="" class="">ナビ1</a></li>
+        <li class="active"><a href="" class="">ナビ1</a></li>
         <li><a href="" class="">ナビ1</a></li>
         <li><a href="" class="">ナビ1</a></li>
         <li><a href="" class="">ナビ1</a></li>
       </ul>
-    </div>
+    </nav>
   </div>
 </header>
 
