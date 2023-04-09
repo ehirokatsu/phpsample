@@ -18,6 +18,8 @@
    </table>
    <a href="/add" class="">追加</a>
    <a href="/find" class="">検索</a>
+   <a href="/board" class="">投稿テーブル</a>
+   <a href="/" class="">戻る</a>
    <table>
    <tr><th>Person</th><th>Board</th></tr>
    @foreach ($items as $item)

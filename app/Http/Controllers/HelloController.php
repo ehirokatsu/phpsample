@@ -20,11 +20,13 @@ class HelloController extends Controller
         $this->helloService = $helloService;
     }
 
+    //ホーム画面
     public function index(Request $request,Response $response,$id=0, $tmp=1)
     {
         return view('index');
     }
-    //
+
+    //クエリ文字列、GETメソッドでの値送信、POST送信、empty,issetの使い方
     public function hello(Request $request,Response $response,$id=0, $tmp=1)
     {
 
@@ -61,7 +63,7 @@ class HelloController extends Controller
             'res'=>$response,
             //'id'=>$id,
             //'tmp'=>$tmp,
-            'id'=>$request->id*$tmp,
+            'id'=>$request->id,
             'tmp'=>$request->tmp,
             //'txt_empty'=>'',
         ];

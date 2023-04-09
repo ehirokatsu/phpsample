@@ -17,6 +17,8 @@
        </tr>
    @endforeach
    </table>
+   <a href="/board/add" class="">追加</a>
+   <a href="/index_db" class="">戻る</a>
 @endsection
 
 @section('footer')
