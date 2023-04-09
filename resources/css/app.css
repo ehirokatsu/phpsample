@@ -1,5 +1,5 @@
 
-
+/*
 label{
   background-color:rgb(184, 236, 220);
 }
@@ -26,7 +26,7 @@ div, p {
 li, dt, dd, a {
   border: 1px dotted #0F0;
 }
-
+*/
 .header {
 
 }
@@ -168,9 +168,38 @@ li, dt, dd, a {
 .main__news--list {
   padding: 40px 12px;
 }
+
+.main__news--list > li{
+  position: relative;
+  border-bottom: 1px solid #222;
+}
+
+/*
+.main__news--list > li:first-child{
+  border-top: 1px solid #222;
+}
+*/
+.main__news--list li:hover::before{  /* :hoverを追加しただけ */
+  display: block;
+  content: '';
+  position: absolute;
+  top: calc(50% - 3px);
+  right: 10px;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid #7a0;
+  border-right: 2px solid #7a0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
 .main__news--list li {
   border-bottom: 1px solid #e8ecee;
   list-style: none;
+}
+.main__news--list li:nth-child(odd){
+  background-color: rgb(246, 243, 243);
 }
 .main__news--list li a {
   display: block;
@@ -180,7 +209,7 @@ li, dt, dd, a {
   display: flex;
 }
 .main__news--list li a:hover {
-  background: #e8ecee;
+  background: #bae7fd;
 }
 .main__news--day {
   width: 265px;

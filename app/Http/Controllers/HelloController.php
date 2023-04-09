@@ -20,9 +20,12 @@ class HelloController extends Controller
         $this->helloService = $helloService;
     }
 
-
-    //
     public function index(Request $request,Response $response,$id=0, $tmp=1)
+    {
+        return view('index');
+    }
+    //
+    public function hello(Request $request,Response $response,$id=0, $tmp=1)
     {
 
         $util = new Util();
@@ -63,8 +66,8 @@ class HelloController extends Controller
             //'txt_empty'=>'',
         ];
         //$data = $request;
-        //return view('hello', $data);
-        return view('index');
+        return view('hello', $data);
+        //return view('index');
     }
 /*
     public function create()

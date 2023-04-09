@@ -22,14 +22,14 @@
     <pre>{{$tmp}}</pre>
 
     <!--GETでクエリーパラメータを送信-->
-    <form method="GET" action="/">
+    <form method="GET" action="/hello">
         @csrf
         <input type="hidden" name="id" value="123">
         <input type="submit" name="button1" value="ボタン1">
     </form>
 
     <!--POSTでフォーム内容を送信-->
-    <form method="POST" action="/">
+    <form method="POST" action="/hello">
         @csrf
         <input type="text" name="txt_empty">
         <input type="text" name="txt_isset">

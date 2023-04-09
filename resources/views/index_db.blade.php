@@ -17,6 +17,7 @@
    @endforeach
    </table>
    <a href="/add" class="">追加</a>
+   <a href="/find" class="">検索</a>
    <table>
    <tr><th>Person</th><th>Board</th></tr>
    @foreach ($items as $item)

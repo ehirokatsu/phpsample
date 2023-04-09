@@ -15,10 +15,12 @@
     </div>
     <nav class="header__menu">
       <ul>
-        <li class="active"><a href="" class="">ナビ1</a></li>
-        <li><a href="" class="">ナビ1</a></li>
-        <li><a href="" class="">ナビ1</a></li>
-        <li><a href="" class="">ナビ1</a></li>
+        <li class="active"><a href="/hello" class="">hello</a></li>
+        <li><a href="/index_db" class="">CRUD</a></li>
+        <li><a href="/helloMiddle" class="">ミドルウェア</a></li>
+        <li><a href="/validator" class="">validator</a></li>
+        <li><a href="/section" class="">section</a></li>
+        <li><a href="/include-each" class="">include-each</a></li>
       </ul>
     </nav>
   </div>
@@ -77,6 +79,22 @@
         <a href="">
           <dl class="main__news--item">
             <dt class="main__news--day">2018</dt>
+            <dd class="main__news--data">text</dd>
+          </dl>
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <dl class="main__news--item">
+            <dt class="main__news--day">2019</dt>
+            <dd class="main__news--data">text</dd>
+          </dl>
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <dl class="main__news--item">
+            <dt class="main__news--day">2019</dt>
             <dd class="main__news--data">text</dd>
           </dl>
         </a>
