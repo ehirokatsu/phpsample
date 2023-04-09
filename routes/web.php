@@ -13,28 +13,24 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
-Route::get('/', function () {
+
+Route::get('/welcome', function () {
     return view('welcome');
 });
-
-
-Route::get('hello', function () {
-    return view('hello');
-});
-*/
-
 
 
 //ルートパラメータを使用する場合。**?はパラメータ省略化の
 //Route::get('/{id?}/{tmp?}', 'App\Http\Controllers\HelloController@index');
 
-//クエリ文字列を使用する場合
+
+
+//ホーム画面
 Route::get('/', 'App\Http\Controllers\HelloController@index');
 
-Route::get('/create', 'App\Http\Controllers\HelloController@create');
-
-Route::post('/', 'App\Http\Controllers\HelloController@post');
+//helloテスト用（クエリ文字列等）
+Route::get('/hello', 'App\Http\Controllers\HelloController@hello');
+//helloテストのフォーム送信先
+Route::post('/hello', 'App\Http\Controllers\HelloController@post');
 
 //extend,sectionディレクティブ
 Route::get('section', function () {
@@ -52,19 +48,22 @@ Route::get('include-each', function () {
 });
 
 
-//ミドルウェア
+//ミドルウェアテスト用
 Route::get('helloMiddle', function (Request $request) {
     return view('helloMiddle', ['data'=>$request->data]);
 })->middleware(HelloMiddleware::class);
 
 
-//バリデータ
+//バリデータテスト用
 Route::get('/validator', function () {
     return view('validator', ['msg'=>'フォームを入力：']);
 });
 Route::post('/validator', 'App\Http\Controllers\HelloController@validator');
 
-//select
+
+
+
+//CRUD(select)
 Route::get('/index_db', 'App\Http\Controllers\HelloController@index_db');
 
 //insert
