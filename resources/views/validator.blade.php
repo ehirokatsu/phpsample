@@ -3,6 +3,7 @@
 @section('title', 'validatorテスト')
 
 @section('content')
+<h2>フォームに入力した内容をチェックします。</h2>
 <p>{{$msg}}</p>
     @if (count($errors) > 0)
         <p>入力に問題があります。再入力して下さい。</p>
@@ -39,6 +40,5 @@ copyright 2020 tuyano.
 @endsection
 
 @section('test')
-@parent
 Validatorのテストページ
 @endsection
