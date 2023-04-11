@@ -93,6 +93,8 @@ class HelloController extends Controller
         return view('hello', $data);
     }
 
+    //バリデータでフォームチェック。
+    //エラーがあった場合は、指定したリンク先にリダイレクトできる。
     public function validator(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -100,6 +102,7 @@ class HelloController extends Controller
             'mail' => 'email',
             'age' => 'numeric|between:0,150',
         ]);
+        
         if ($validator->fails()) {
             return redirect('/validator')
                         ->withErrors($validator)

@@ -169,17 +169,12 @@ li, dt, dd, a {
   padding: 40px 12px;
 }
 
+/*マウスオーバーで矢印表示*/
 .main__news--list > li{
-  position: relative;
+  position: relative;/*子要素でabsoluteを使うため*/
   border-bottom: 1px solid #222;
 }
-
-/*
-.main__news--list > li:first-child{
-  border-top: 1px solid #222;
-}
-*/
-.main__news--list li:hover::before{  /* :hoverを追加しただけ */
+.main__news--list li:hover::before{ 
   display: block;
   content: '';
   position: absolute;

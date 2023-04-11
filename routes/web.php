@@ -90,3 +90,7 @@ Route::post('board/add', 'App\Http\Controllers\BoardController@create');
 
 //DBクラス、クエリビルダで結合
 Route::get('board/index_dbclass', 'App\Http\Controllers\BoardController@index_dbclass');
+
+//クイズ
+Route::get('/question', 'App\Http\Controllers\QuizController@question');
+Route::post('/answer', 'App\Http\Controllers\QuizController@answer');

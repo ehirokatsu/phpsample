@@ -21,6 +21,7 @@
         <li><a href="/validator" class="">validator</a></li>
         <li><a href="/section" class="">section</a></li>
         <li><a href="/include-each" class="">include-each</a></li>
+        <li><a href="/question" class="">question</a></li>
       </ul>
     </nav>
   </div>
