@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  @vite('resources/css/app.css')
+  @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
   <title>Document</title>
 </head>
 <body>
+  <div id="T1"></div>
 <header class="header">
   <div class="header__wrap">
     <div class="header__logo">
@@ -26,10 +27,9 @@
     </nav>
   </div>
 </header>
-
 <main class="main">
   <section class="main__kv">
-    難しいことを簡単に<br>
+    <div class="test111">難しいことを簡単に</div><br>
   </section>
   <section class="main__about">
     <h1 class="main__about--ttl">h1 title</h1>
