@@ -48,9 +48,37 @@ console.log(mybox['width']);
 let aaa = 'height';
 console.log(mybox[aaa]);
 
+
+//デジタル時計を表示
 window.onload = function() {
     setInterval(function() {
       var dd = new Date();
       document.getElementById("T1").innerHTML = dd.toLocaleString();
     }, 1000);
   }
+
+
+//Ajax
+let request = new XMLHttpRequest();
+
+//XMLHttpRequest オブジェクトが状態変化した時の処理
+request.onreadystatechange = function () {
+    //状態番号を出力
+    console.log(request.readyState);
+    //レスポンス受信が完了した場合
+    if (request.readyState == 4) {
+        //レスポンスが正常だった場合
+        if (request.status == 200) {
+            let data = request.responseText;
+            console.log(data);
+            let node = document.getElementById("result");
+            node.innerHTML = request.responseText;
+        }
+    }
+}
+
+//HTTPリクエストを初期化
+request.open('GET', 'http://127.0.0.1:8000/storage/test.txt', true);
+//HTTPリクエストを送信
+request.send(null);
+
