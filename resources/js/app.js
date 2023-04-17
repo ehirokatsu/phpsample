@@ -94,6 +94,22 @@ function getData(){
     request.send(null);
 }
 
+function EncodeHTMLForm( data )
+{
+    var params = [];
+
+    for( var name in data )
+    {
+        var value = data[ name ];
+        var param = encodeURIComponent( name ) + '=' + encodeURIComponent( value );
+
+        params.push( param );
+    }
+
+    return params.join( '&' ).replace( /%20/g, '+' );
+}
+
+
 function sendData(){
     //Ajax
     let request = new XMLHttpRequest();
@@ -104,7 +120,7 @@ function sendData(){
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     //HTTPリクエストを送信
-    request.send(send_string);
+    request.send(EncodeHTMLForm(send_string));
 }
 
 
