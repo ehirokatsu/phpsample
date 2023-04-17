@@ -8,7 +8,7 @@
   <title>Document</title>
 </head>
 <body>
-  <div id="result"></div>
+
   <div id="T1"></div>
 <header class="header">
   <div class="header__wrap">
@@ -28,6 +28,10 @@
     </nav>
   </div>
 </header>
+<form>
+<input type="button" value="データの取得" id="testBtn">
+</form>
+<div id="result"></div>
 <main class="main">
   <section class="main__kv">
     <div class="test111">難しいことを簡単に</div><br>

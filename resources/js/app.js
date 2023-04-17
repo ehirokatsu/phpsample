@@ -57,28 +57,61 @@ window.onload = function() {
     }, 1000);
   }
 
+function getData(){
+    //Ajax
+    let request = new XMLHttpRequest();
 
-//Ajax
-let request = new XMLHttpRequest();
-
-//XMLHttpRequest オブジェクトが状態変化した時の処理
-request.onreadystatechange = function () {
-    //状態番号を出力
-    console.log(request.readyState);
-    //レスポンス受信が完了した場合
-    if (request.readyState == 4) {
-        //レスポンスが正常だった場合
-        if (request.status == 200) {
-            let data = request.responseText;
-            console.log(data);
-            let node = document.getElementById("result");
-            node.innerHTML = request.responseText;
+    //XMLHttpRequest オブジェクトが状態変化した時の処理
+    request.onreadystatechange = function () {
+        //状態番号を出力
+        console.log(request.readyState);
+        //レスポンス受信が完了した場合
+        if (request.readyState == 4) {
+            console.log("完了(レスポンスの受信完了)");
+            //レスポンスが正常だった場合
+            if (request.status == 200) {
+                //let data = request.responseText;
+                //console.log(data);
+                let node = document.getElementById("result");
+                node.innerHTML = request.responseText;
+            }
+        } else if (request.readyState == 0) {
+            console.log("未初期化(openメソッドが呼ばれていない)");
+        }
+        else if (request.readyState == 1) {
+            console.log("ロード中(openメソッドは済み、sendメソッドが未)");
+        }
+        else if (request.readyState == 2) {
+            console.log("ロード済(sendメソッドは済みでレスポンス待ち)");
+        }
+        else if (request.readyState == 3) {
+            console.log("受信中(レスポンス受信中)");
         }
     }
+    //HTTPリクエストを初期化
+    request.open('GET', 'http://127.0.0.1:8000/storage/test.txt', true);
+    //HTTPリクエストを送信
+    request.send(null);
 }
 
-//HTTPリクエストを初期化
-request.open('GET', 'http://127.0.0.1:8000/storage/test.txt', true);
-//HTTPリクエストを送信
-request.send(null);
+function sendData(){
+    //Ajax
+    let request = new XMLHttpRequest();
+
+   let send_string = { name: 'test1', mail: 'mail@a', age: 10};
+    //HTTPリクエストを初期化
+    request.open('POST', 'http://127.0.0.1:8000/add', true);
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    //HTTPリクエストを送信
+    request.send(send_string);
+}
+
+
+//HTMLのボタン要素を取得
+const btn = document.getElementById('testBtn');
+//クリックした時にAjax発動（getData()だとページロード後に呼び出されてしまう）
+btn.addEventListener('click', sendData);
+
+
 
