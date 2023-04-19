@@ -57,24 +57,33 @@ window.onload = function() {
     }, 1000);
   }
 
+//Ajax GET
 function getData(){
     //Ajax
     let request = new XMLHttpRequest();
 
+    //結果を格納するHTML要素を追加
+    let node = document.getElementById("getResult");
+    
     //XMLHttpRequest オブジェクトが状態変化した時の処理
     request.onreadystatechange = function () {
+        
         //状態番号を出力
         console.log(request.readyState);
+
         //レスポンス受信が完了した場合
         if (request.readyState == 4) {
+
             console.log("完了(レスポンスの受信完了)");
+
             //レスポンスが正常だった場合
             if (request.status == 200) {
                 //let data = request.responseText;
                 //console.log(data);
-                let node = document.getElementById("result");
+                
                 node.innerHTML = request.responseText;
             }
+
         } else if (request.readyState == 0) {
             console.log("未初期化(openメソッドが呼ばれていない)");
         }
@@ -94,29 +103,63 @@ function getData(){
     request.send(null);
 }
 
+
+function getData2() {
+
+    let request = new XMLHttpRequest();
+
+    let node = document.getElementById("getResult");
+    
+    request.addEventListener('loadstart', function(){
+        node.textContent = '通信中';
+    }, false);
+    request.addEventListener('progress', function(){
+        node.textContent = '通信中2';
+    }, false);
+    request.addEventListener('load', function(){
+        node.textContent = request.responseText;
+    }, false);
+
+    //HTTPリクエストを初期化
+    request.open('GET', 'http://127.0.0.1:8000/storage/test.txt', true);
+    //HTTPリクエストを送信
+    request.send(null);
+}
+
+
+
+
 function EncodeHTMLForm( data )
 {
-    var params = [];
+    let params = [];
 
-    for( var name in data )
+    for( let name in data )
     {
-        var value = data[ name ];
-        var param = encodeURIComponent( name ) + '=' + encodeURIComponent( value );
+        let value = data[ name ];
+        let param = encodeURIComponent( name ) + '=' + encodeURIComponent( value );
 
         params.push( param );
     }
 
+    //「application/x-www-form-urlencoded」では半角スペースが「+」でなければならないため、
+    //エンコード結果の「%20」を「+」に修正しています。
     return params.join( '&' ).replace( /%20/g, '+' );
 }
 
 
+//Ajax POST
 function sendData(){
-    //Ajax
+
     let request = new XMLHttpRequest();
 
-   let send_string = { name: 'test1', mail: 'mail@a', age: 10};
+    //post送信したいデータ
+    let send_string = { name: 'test1', mail: 'mail@a', age: 10};
+
     //HTTPリクエストを初期化
     request.open('POST', 'http://127.0.0.1:8000/add', true);
+    //request.open('POST', 'add', true);
+
+    //Content-Typeヘッダーの指定
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     //HTTPリクエストを送信
@@ -125,9 +168,11 @@ function sendData(){
 
 
 //HTMLのボタン要素を取得
-const btn = document.getElementById('testBtn');
+const getBtn = document.getElementById('getBtn');
 //クリックした時にAjax発動（getData()だとページロード後に呼び出されてしまう）
-btn.addEventListener('click', sendData);
+getBtn.addEventListener('click', getData2);
 
+const postBtn = document.getElementById('postBtn');
+postBtn.addEventListener('click', sendData);
 
 

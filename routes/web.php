@@ -94,3 +94,7 @@ Route::get('board/index_dbclass', 'App\Http\Controllers\BoardController@index_db
 //クイズ
 Route::get('/question', 'App\Http\Controllers\QuizController@question');
 Route::post('/answer', 'App\Http\Controllers\QuizController@answer');
+
+Route::get('/bm', function () {
+    return view('bm');
+});

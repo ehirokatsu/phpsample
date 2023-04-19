@@ -29,9 +29,11 @@
   </div>
 </header>
 <form>
-<input type="button" value="データの取得" id="testBtn">
+<input type="button" value="データの取得" id="getBtn">
+<input type="button" value="データの送信" id="postBtn">
 </form>
-<div id="result"></div>
+<div id="getResult"></div>
+<div id="postResult"></div>
 <main class="main">
   <section class="main__kv">
     <div class="test111">難しいことを簡単に</div><br>
