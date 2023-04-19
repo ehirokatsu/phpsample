@@ -15,6 +15,15 @@ function cal ( a, b ) {
 }
 console.log(cal(10, 20));
 
+let sum2 = function (x, y) {
+    return x+y;
+};
+console.log(sum2(10, 20));
+
+let sum3 = (x, y) => {
+    return x+y;
+};
+console.log(sum3(10, 20));
 
 //配列とfor文
 let array = new Array(1,2,3);
