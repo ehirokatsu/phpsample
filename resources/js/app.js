@@ -1,3 +1,4 @@
+import { first } from 'lodash';
 import './bootstrap';
 //'use strict';
 
@@ -183,5 +184,87 @@ getBtn.addEventListener('click', getData2);
 
 const postBtn = document.getElementById('postBtn');
 postBtn.addEventListener('click', sendData);
+
+
+
+//クラス（関数ベース）
+let Member = function ( firstName, lastName ) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.getName = function () {
+        return this.firstName + '' + this.lastName;
+    }
+}
+
+let mem = new Member( 'Yamada', 'Ichiro');
+console.log(mem.getName());
+console.log(mem.firstName);
+
+//クラス（ES2015）
+class Meibo {
+    constructor ( firstName, lastName ) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    get firstName () {
+        return this._firstName;
+    }
+    set firstName ( value ) {
+        this._firstName = value;
+    }
+    get lastName () {
+        return this._lastName;
+    }
+    set lastName ( value ) {
+        this._lastName = value;
+    }
+
+    getName () {
+        return this.firstName + this.lastName;
+    }
+}
+
+let meibo = new Meibo( 'Yamada', 'Ichiro');
+console.log(meibo.getName());
+console.log(meibo.firstName);
+
+
+//クラス継承
+class WorkMeibo extends Meibo {
+
+    getWork () {
+        return this.firstName + this.lastName + 'Manager';
+    }
+}
+
+let workMeibo = new WorkMeibo( 'Yamada', 'Ichiro');
+console.log(workMeibo.getWork());
+console.log(workMeibo.firstName);
+
+
+
+//マウスイベント
+//反映するHTMLを取得
+let mouse = document.getElementById('mouse');
+
+//マウスダウン
+function mouseDown (event) {
+    mouse.textContent = 'mousedown';
+    console.log(event);
+}
+//マウスアップ
+function mouseUp (event) {
+    mouse.textContent = 'mouseUp';
+    console.log(event);
+}
+
+//プロパティでイベントハンドラ
+//mouse.onmousedown = mouseDown;
+//mouse.onmouseup = mouseUp;
+ 
+//イベントリスナ
+mouse.addEventListener('mousedown', mouseDown)
+mouse.addEventListener('mouseup', mouseUp)
 
 
