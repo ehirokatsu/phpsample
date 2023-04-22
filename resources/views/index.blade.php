@@ -7,6 +7,11 @@
   @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
   <title>Document</title>
 </head>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <body>
 
   <div id="T1"></div>
@@ -35,6 +40,16 @@
 <div id="getResult"></div>
 <div id="postResult"></div>
 <div id="mouse">マウステスト</div>
+<input type="button" value="ー" id="menu1MinusBtn">
+<input type="button" value="＋" id="menu1PlusBtn">
+<input type="button" value="ー" id="menu2MinusBtn">
+<input type="button" value="＋" id="menu2PlusBtn">
+<input type="button" value="ー" id="menu3MinusBtn">
+<input type="button" value="＋" id="menu3PlusBtn">
+<div id="menu1CountLabel"></div>
+<div id="menu2CountLabel"></div>
+<div id="menu3CountLabel"></div>
+<div id="totalAmountLabel"></div>
 <main class="main">
   <section class="main__kv">
     <div class="test111">難しいことを簡単に</div><br>

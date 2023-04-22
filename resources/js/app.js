@@ -109,29 +109,37 @@ function getData(){
     }
     //HTTPリクエストを初期化
     request.open('GET', 'http://127.0.0.1:8000/storage/test.txt', true);
+
     //HTTPリクエストを送信
     request.send(null);
 }
 
-
+//Ajax GET イベントリスナーで実装
 function getData2() {
 
     let request = new XMLHttpRequest();
 
+    //通信状態を表示するHTML要素を取得
     let node = document.getElementById("getResult");
-    
+
+    //ajax開始
     request.addEventListener('loadstart', function(){
         node.textContent = '通信中';
     }, false);
+
+    //処理中
     request.addEventListener('progress', function(){
         node.textContent = '通信中2';
     }, false);
+
+    //サーバから受信完了
     request.addEventListener('load', function(){
         node.textContent = request.responseText;
     }, false);
 
     //HTTPリクエストを初期化
     request.open('GET', 'http://127.0.0.1:8000/storage/test.txt', true);
+
     //HTTPリクエストを送信
     request.send(null);
 }
@@ -268,3 +276,160 @@ mouse.addEventListener('mousedown', mouseDown)
 mouse.addEventListener('mouseup', mouseUp)
 
 
+//+ボタンとーボタンで数量をカウントし、合計金額を表示する
+/*
+let menu1Count = 0;
+let menu2Count = 0;
+let menu3Count = 0;
+let totalAmount = 0;
+
+let menu1MinusBtn = document.getElementById('menu1MinusBtn');
+let menu1PlusBtn = document.getElementById('menu1PlusBtn');
+let menu2MinusBtn = document.getElementById('menu2MinusBtn');
+let menu2PlusBtn = document.getElementById('menu2PlusBtn');
+let menu3MinusBtn = document.getElementById('menu3MinusBtn');
+let menu3PlusBtn = document.getElementById('menu3PlusBtn');
+
+let menu1CountLabel = document.getElementById('menu1CountLabel');
+let menu2CountLabel = document.getElementById('menu2CountLabel');
+let menu3CountLabel = document.getElementById('menu3CountLabel');
+let totalAmountLabel = document.getElementById('totalAmountLabel');
+
+function menu1CountUp () {
+    menu1Count++;
+    menu1CountLabel.textContent = 'A:'+menu1Count;
+    totalAmount = totalAmount + 600;
+    totalAmountLabel.textContent = totalAmount;
+}
+function menu1CountDown () {
+    menu1Count--;
+    menu1CountLabel.textContent = 'A:'+menu1Count;
+    totalAmount = totalAmount - 600;
+    totalAmountLabel.textContent = totalAmount;
+}
+function menu2CountUp () {
+    menu2Count++;
+    menu2CountLabel.textContent = 'B:'+menu2Count;
+    totalAmount = totalAmount + 100;
+    totalAmountLabel.textContent = totalAmount;
+}
+function menu2CountDown () {
+    menu2Count--;
+    menu2CountLabel.textContent = 'B:'+menu2Count;
+    totalAmount = totalAmount - 100;
+    totalAmountLabel.textContent = totalAmount;
+}
+
+
+menu1MinusBtn.addEventListener('click', menu1CountDown);
+menu1PlusBtn.addEventListener('click', menu1CountUp);
+menu2MinusBtn.addEventListener('click', menu2CountDown);
+menu2PlusBtn.addEventListener('click', menu2CountUp);
+*/
+
+//上記をJqueryで記載。
+$(function(){
+
+    let menu1Count = 0;
+    let menu2Count = 0;
+    let menu3Count = 0;
+    let totalAmount = 0;
+
+    $('#menu1MinusBtn').click(function(){
+        menu1Count--;
+        $('#menu1CountLabel').text('A:'+menu1Count);
+        totalAmount = totalAmount - 600;
+        $('#totalAmountLabel').text(totalAmount);
+    });
+});
+
+
+//jsonデータを定義
+const json = '{"people": [{"name": "Oleg Kononenko", "craft": "ISS"}, {"name": "David Saint-Jacques", "craft": "ISS"}, {"name": "Anne McClain", "craft": "ISS"}], "number": 3, "message": "success"}';
+
+//jsonデータの取得先を定義
+const url = 'http://api.open-notify.org/astros.json';
+
+
+//jsonデータの「people」箇所を取り出す
+function getSpacePeople(json) {
+
+	const people = JSON.parse(json).people;
+	
+    console.log(people);
+}
+
+getSpacePeople(json);
+
+//urlからGETメソッドでjsonデータを取得する
+function getSpacePeopleUrl(url) {
+
+    const request = new XMLHttpRequest();
+    
+    request.addEventListener('load', () => {
+        const people = JSON.parse(request.response).people;
+        console.log(people);
+    });
+	
+    request.open('GET', url);
+    
+    request.send();
+}
+getSpacePeopleUrl(url);
+
+
+//setTimeout関数
+function async ( arg ) {
+
+    console.log('start');
+
+    setTimeout(() => {
+        //argミリ秒経過したら以下が実行される  
+        console.log('処理2');
+        console.log(Math.floor(arg/1000) + '秒経過');
+        
+        setTimeout(() => {
+            //argミリ秒経過したら以下が実行される  
+            console.log('処理B');
+        }, arg );
+        console.log('処理A');
+    }, arg );
+
+    console.log('処理1');
+
+}
+async(1000);
+
+//promise
+const time = 1000;
+const promise = new Promise((resolve) => {
+    console.log('start');
+    setTimeout(() => {
+        resolve(time);
+    }, time );
+    console.log('処理1');
+});
+promise.then((arg) => {
+        //argミリ秒経過したら以下が実行される  
+        console.log('処理2');
+        console.log(Math.floor(arg/1000) + '秒経過');
+
+});
+
+//promiseを関数化
+function async(time) {
+    return new Promise((resolve) => {
+        console.log('start');
+        setTimeout(() => {
+            resolve(time);
+        }, time );
+        console.log('処理1');
+    });
+}
+const promise2 = async(1000);
+promise2.then((arg) => {
+        //argミリ秒経過したら以下が実行される  
+        console.log('処理2');
+        console.log(Math.floor(arg/1000) + '秒経過');
+
+});
