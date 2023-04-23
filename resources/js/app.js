@@ -450,7 +450,7 @@ function getSpacePeopleUrlPromise(url) {
     });
 
 }
-getSpacePeopleUrlPromise(url)
+getSpacePeopleUrlPromise(url)//;は付与しない
 .then(
     (data) => {
         const people = JSON.parse(data).people;
@@ -504,3 +504,28 @@ async function getSpacePeopleUrlAsyncWait(url) {
     }
 }
 getSpacePeopleUrlAsyncWait(url);
+
+
+
+
+//関数の引数に関数を渡すこともできる
+let testFunc1 = function ( arg1, arg2 ) {
+    this.arg1 = arg1;
+    this.arg2 = arg2;
+    this.getSum = function () {
+        return this.arg1 + this.arg2;
+    }
+}
+
+function testers ( args ) {
+    return args;
+}
+
+let testa = new testFunc1( 1, 2);
+console.log(testa.getSum());
+
+console.log(testers(10));
+
+let testb = new testFunc1( testers(10), 2);
+console.log(testb.arg1);
+console.log(testb.getSum());
