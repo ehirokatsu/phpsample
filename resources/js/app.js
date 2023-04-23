@@ -433,3 +433,74 @@ promise2.then((arg) => {
         console.log(Math.floor(arg/1000) + '秒経過');
 
 });
+
+
+//PromiseとXmlHttpRequestを使用
+function getSpacePeopleUrlPromise(url) {
+    return new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest();
+        request.addEventListener('load', () => {
+            resolve(request.response);
+        });
+        request.addEventListener('error', (error) => {
+            reject(error);
+        })
+        request.open('GET', url);
+        request.send();
+    });
+
+}
+getSpacePeopleUrlPromise(url)
+.then(
+    (data) => {
+        const people = JSON.parse(data).people;
+        console.log(people);    
+    },
+    (error) => {
+        console.error(new Error('ori error'));
+    }
+);
+
+//fetch
+function getSpacePeopleUrlFetch(url) {
+    return fetch(url)//イベントリスナ、open、sendを行う
+    .then((response) => {//fetchの戻り値がresponse。内部的にはpromise
+        console.log('fetch');
+        console.log(response.json());//jsonに変換して取得。promiseオブジェクトになる
+    });
+}
+getSpacePeopleUrlFetch(url);
+
+//fetch2
+function getSpacePeopleUrlFetch2(url) {
+    return fetch(url)//イベントリスナ、open、sendを行う
+    .then((response) => {//fetchの戻り値がresponse。内部的にはpromise
+        return new Promise((resolve, reject) => {
+            response.json()
+            .then(
+                (data) => resolve(data),
+                (error) => reject(error),
+            );
+        });
+    });
+}
+getSpacePeopleUrlFetch2(url)
+.then(
+    (data) => {
+        console.log(data.people);
+    },
+    (error) => {
+        console.error(`error: ${error}`);
+    }
+);
+
+//async await 
+async function getSpacePeopleUrlAsyncWait(url) {
+    try {
+        const data = await(await fetch(url)).json();
+        console.log(data.people);
+    } catch (error) {
+        console.error(`error: ${error}`);
+    }
+}
+getSpacePeopleUrlAsyncWait(url);
