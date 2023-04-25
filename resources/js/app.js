@@ -417,7 +417,7 @@ promise.then((arg) => {
 });
 
 //promiseを関数化
-function async(time) {
+function asyncOri(time) {
     return new Promise((resolve) => {
         console.log('start');
         setTimeout(() => {
@@ -426,7 +426,7 @@ function async(time) {
         console.log('処理1');
     });
 }
-const promise2 = async(1000);
+const promise2 = asyncOri(1000);
 promise2.then((arg) => {
         //argミリ秒経過したら以下が実行される  
         console.log('処理2');
@@ -465,7 +465,6 @@ getSpacePeopleUrlPromise(url)//;は付与しない
 function getSpacePeopleUrlFetch(url) {
     return fetch(url)//イベントリスナ、open、sendを行う
     .then((response) => {//fetchの戻り値がresponse。内部的にはpromise
-        console.log('fetch');
         console.log(response.json());//jsonに変換して取得。promiseオブジェクトになる
     });
 }
@@ -493,6 +492,18 @@ getSpacePeopleUrlFetch2(url)
         console.error(`error: ${error}`);
     }
 );
+
+
+fetch(url)
+.then(response => response.json())
+.then(data => console.log(data.people))
+.catch(error => {
+  alert(error);  // 例外（エラー）が発生した場合に実行
+})
+.finally(() => {
+  console.log('finally');  // 処理結果の成否に関わらず実行
+});
+
 
 //async await 
 async function getSpacePeopleUrlAsyncWait(url) {
@@ -529,3 +540,81 @@ console.log(testers(10));
 let testb = new testFunc1( testers(10), 2);
 console.log(testb.arg1);
 console.log(testb.getSum());
+
+
+function getForecast (url) {
+    return new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest();
+        request.addEventListener('load', () => resolve(request.response));
+        request.addEventListener('error', (error) => reject(error));
+        request.open('GET', url);
+        request.send();
+    });
+ 
+}
+getForecast('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
+.then(
+    (data) => {
+        console.log(data);
+        //console.log(JSON.parse(data).areas);
+        },
+    (error) => {
+        console.error(`error: ${error}`);
+    }
+);
+
+
+//fetchのサンプル
+fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
+.then(function(response) {
+  return response.json();
+})
+.then(function(data) {
+  return console.log(data);
+});
+
+//上記で関数内が１行なら｛｝を省略可能
+fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
+.then(response => response.json())
+.then(data => console.log(data));
+
+//fetchでエラー処理
+fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
+.then(response => {
+  if (!response.ok) {
+    throw new Error('Network response was not ok');  // fetchが成功したかどうかの判定
+  }
+  return response.json()
+})
+.then(data => console.log(data))
+.catch(error => {
+  alert(error);  // 例外（エラー）が発生した場合に実行
+})
+.finally(() => {
+  console.log('finally');  // 処理結果の成否に関わらず実行
+});
+
+//async
+(async () => {
+  const response = await fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json');
+  const data = await response.json();
+  console.log(data);
+})();
+
+//asyncでエラー処理
+(async () => {
+    try {
+      const response = await fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');  // fetchが成功したかどうかの判定
+      }
+      const data = await response.json();
+      console.log(data);
+    } catch(e) {
+      alert(e);  // 例外（エラー）が発生した場合に実行
+    } finally {
+      console.log('finally');  // 処理結果の成否に関わらず実行
+    }
+})();
+
+
