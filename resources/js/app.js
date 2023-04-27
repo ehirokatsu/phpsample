@@ -147,6 +147,8 @@ function getData2() {
 
 
 
+
+
 function EncodeHTMLForm( data )
 {
     let params = [];
@@ -164,8 +166,7 @@ function EncodeHTMLForm( data )
     return params.join( '&' ).replace( /%20/g, '+' );
 }
 
-
-//Ajax POST
+//Ajax POST XMLHttpRequest
 function sendData(){
 
     let request = new XMLHttpRequest();
@@ -185,13 +186,57 @@ function sendData(){
 }
 
 
+//Ajax POST fetch
+function sendData2(){
+    const postData = new FormData; // フォーム方式で送る場
+    postData.set('name', 'test1'); // set()で格納する
+    postData.set('mail', 'mail@a'); // set()で格納する
+    postData.set('age', '10'); // set()で格納する
+
+    fetch('add', { // 第1引数に送り先
+        method: 'POST',
+        headers: {'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content}, // CSRFトークン対策
+        body: postData
+    })
+    .then(response => {
+    }) 
+    .catch(error => {
+        console.log(error); // エラー表示
+    });
+}
+
+//Ajax POST await
+async function sendData3 () {
+    const postData = new FormData; // フォーム方式で送る場
+    postData.set('name', 'test1'); // set()で格納する
+    postData.set('mail', 'mail@a'); // set()で格納する
+    postData.set('age', '10'); // set()で格納する
+
+    try {
+        const response = await fetch('add', { // 第1引数に送り先
+            method: 'POST',
+            headers: {'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content}, // CSRFトークン対策
+            body: postData
+        });
+        if (!response.ok) {
+            throw new Error('Network response was not ok');  // fetchが成功したかどうかの判定
+        }
+    } catch(e) {
+      alert(e);  // 例外（エラー）が発生した場合に実行
+    } finally {
+      console.log('finally');  // 処理結果の成否に関わらず実行
+    }
+}
+
+
+
 //HTMLのボタン要素を取得
 const getBtn = document.getElementById('getBtn');
 //クリックした時にAjax発動（getData()だとページロード後に呼び出されてしまう）
 getBtn.addEventListener('click', getData2);
 
 const postBtn = document.getElementById('postBtn');
-postBtn.addEventListener('click', sendData);
+postBtn.addEventListener('click', sendData3);
 
 
 
@@ -542,6 +587,46 @@ console.log(testb.arg1);
 console.log(testb.getSum());
 
 
+
+/**************************************************************** 
+ * 関数の書き方
+ * １．function
+ * ２．アロー
+ * ３．関数内が一文なら｛｝とreturnを省略
+ * 
+************************************************************/
+fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
+.then(function(response) {
+  return response.json();
+})
+.then(function(data) {
+  return console.log(data);
+});
+
+fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
+.then((response) => {
+  return response.json();
+})
+.then((data) => {
+  return console.log(data);
+});
+
+
+fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
+.then(response => response.json())
+.then(data => console.log(data));
+
+
+
+/**************************************************************** 
+ * 天気データを下記から取得
+ * https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json
+ * １．Promiseを使用
+ * ２．fetchを使用
+ * ３．awaitを使用
+ * 
+************************************************************/
+
 function getForecast (url) {
     return new Promise((resolve, reject) => {
         const request = new XMLHttpRequest();
@@ -552,16 +637,40 @@ function getForecast (url) {
     });
  
 }
+/*
 getForecast('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
 .then(
-    (data) => {
-        console.log(data);
+    function(response) {
+        return JSON.parse(response);
+        //return response.json();
+      }
+      .then(function(data) {
+        return console.log(data);
+      })
+        //console.log(data);
         //console.log(JSON.parse(data).areas);
-        },
+    ,
     (error) => {
         console.error(`error: ${error}`);
     }
 );
+*/
+getForecast('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
+.then(
+    function(response) {
+        return JSON.parse(response);
+
+        //以下はNG
+        //return response.json();
+      }
+)
+.then(function(data) {
+    console.log(data);
+})
+.catch((error) => {
+    console.error(`error: ${error}`);
+});
+
 
 
 //fetchのサンプル
@@ -573,20 +682,18 @@ fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
   return console.log(data);
 });
 
-//上記で関数内が１行なら｛｝を省略可能
-fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
-.then(response => response.json())
-.then(data => console.log(data));
 
 //fetchでエラー処理
 fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
-.then(response => {
+.then(function (response) {
   if (!response.ok) {
     throw new Error('Network response was not ok');  // fetchが成功したかどうかの判定
   }
-  return response.json()
+  return response.json();
 })
-.then(data => console.log(data))
+.then(function(data) {
+    return console.log(data);
+})
 .catch(error => {
   alert(error);  // 例外（エラー）が発生した場合に実行
 })
@@ -594,7 +701,7 @@ fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
   console.log('finally');  // 処理結果の成否に関わらず実行
 });
 
-//async
+//asyncのサンプル
 (async () => {
   const response = await fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json');
   const data = await response.json();
