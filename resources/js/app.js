@@ -621,12 +621,50 @@ fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
 /**************************************************************** 
  * 天気データを下記から取得
  * https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json
- * １．Promiseを使用
- * ２．fetchを使用
- * ３．awaitを使用
+ * １．XMLHttpRequestを使用
+ * ２．Promiseを使用
+ * ３．fetchを使用
+ * ４．awaitを使用
  * 
 ************************************************************/
 
+//１．XMLHttpRequestを使用
+//onreadystatechangeを使用
+function getForecastXml(url) {
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        
+        //状態番号を出力
+        console.log(request.readyState);
+
+        //レスポンス受信が完了した場合
+        if (request.readyState == 4) {
+            const data = JSON.parse(request.response);
+            console.log(data);
+        }
+    }
+
+    request.open('GET', url);
+    request.send();
+}
+getForecastXml('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json');
+
+//addEventListenerを使用
+function getForecastXml2(url) {
+    const request = new XMLHttpRequest();
+    request.addEventListener('load', () => {
+        const data = JSON.parse(request.response);
+        console.log(data);
+    });
+    request.open('GET', url);
+    request.send();
+}
+getForecastXml2('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json');
+
+
+// ２．Promiseを使用
 function getForecast (url) {
     return new Promise((resolve, reject) => {
         const request = new XMLHttpRequest();
@@ -635,26 +673,7 @@ function getForecast (url) {
         request.open('GET', url);
         request.send();
     });
- 
 }
-/*
-getForecast('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
-.then(
-    function(response) {
-        return JSON.parse(response);
-        //return response.json();
-      }
-      .then(function(data) {
-        return console.log(data);
-      })
-        //console.log(data);
-        //console.log(JSON.parse(data).areas);
-    ,
-    (error) => {
-        console.error(`error: ${error}`);
-    }
-);
-*/
 getForecast('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
 .then(
     function(response) {
@@ -672,7 +691,7 @@ getForecast('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
 });
 
 
-
+//３．fetchを使用
 //fetchのサンプル
 fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
 .then(function(response) {
@@ -701,6 +720,8 @@ fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
   console.log('finally');  // 処理結果の成否に関わらず実行
 });
 
+
+//４．awaitを使用
 //asyncのサンプル
 (async () => {
   const response = await fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json');
@@ -723,5 +744,4 @@ fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
       console.log('finally');  // 処理結果の成否に関わらず実行
     }
 })();
-
 

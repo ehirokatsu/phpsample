@@ -98,3 +98,10 @@ Route::post('/answer', 'App\Http\Controllers\QuizController@answer');
 Route::get('/bm', function () {
     return view('bm');
 });
+
+
+Route::get('/ajax', 'App\Http\Controllers\HelloController@ajax');
+Route::get('/ajax/showAll', 'App\Http\Controllers\HelloController@showAjaxAll');
+Route::post('/ajax/show', 'App\Http\Controllers\HelloController@showAjax');
+Route::post('/ajax/add', 'App\Http\Controllers\HelloController@addAjax');
+Route::post('/ajax/del', 'App\Http\Controllers\HelloController@delAjax');
