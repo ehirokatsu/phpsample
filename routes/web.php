@@ -99,7 +99,7 @@ Route::get('/bm', function () {
     return view('bm');
 });
 
-
+//非同期通信アプリ
 Route::get('/ajax', 'App\Http\Controllers\HelloController@ajax');
 Route::get('/ajax/showAll', 'App\Http\Controllers\HelloController@showAjaxAll');
 Route::post('/ajax/show', 'App\Http\Controllers\HelloController@showAjax');
