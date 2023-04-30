@@ -22,24 +22,24 @@
     <div class="row">
       <div class="col-sm-4">
         <div class="card mb-5">
-            <div class="card-header">詳細検索</div>
-            <div class="card-body">
-              <p class="card-text">
-                <div class="form-group row">
-                    <div class="col-md-4">IDを入力:</div>
-                    <div class="col-md-4">
-                        <input class="form-control" id="id_number">
-                    </div>
+          <div class="card-header">詳細検索</div>
+          <div class="card-body">
+            <p class="card-text">
+              <div class="form-group row">
+                <div class="col-md-4">IDを入力:</div>
+                <div class="col-md-4">
+                  <input class="form-control" id="id_number">
                 </div>
-                <div class="form-group row">
-                    <div class="col-md-12">
-                        <button id="ajax_show" class="btn btn-info text-white">詳細ボタン</button>
-                    </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <button id="ajax_show" class="btn btn-info text-white">詳細ボタン</button>
                 </div>
-                <!-- 取得したレコードを表示 -->
-                <div class="col-md-12" id="result"></div>
-              </p>
-            </div>
+              </div>
+              <!-- 取得したレコードを表示 -->
+              <div class="col-md-12" id="result"></div>
+            </p>
+          </div>
         </div>
       </div>
       <div class="col-sm-4">
@@ -48,27 +48,27 @@
           <div class="card-body">
             <p class="card-text">
               <div class="form-group row">
-                  <div class="col-md-5">名前を入力:</div>
-                  <div class="col-md-7">
-                      <input class="form-control" id="name">
-                  </div>
+                <div class="col-md-5">名前を入力:</div>
+                <div class="col-md-7">
+                  <input class="form-control" id="name">
+                </div>
               </div>
               <div class="form-group row">
-                  <div class="col-md-5">メールを入力:</div>
-                  <div class="col-md-7">
-                      <input class="form-control" id="mail">
-                  </div>
+                <div class="col-md-5">メールを入力:</div>
+                <div class="col-md-7">
+                  <input class="form-control" id="mail">
+                </div>
               </div>
               <div class="form-group row">
                 <div class="col-md-5">年齢を入力:</div>
                 <div class="col-md-7">
-                    <input class="form-control" id="age">
+                  <input class="form-control" id="age">
                 </div>
               </div>
               <div class="form-group row">
-                  <div class="col-md-12">
-                      <button id="ajax_add" class="btn btn-info text-white">追加ボタン</button>
-                  </div>
+                <div class="col-md-12">
+                  <button id="ajax_add" class="btn btn-info text-white">追加ボタン</button>
+                </div>
               </div>
               <!-- 取得したレコードを表示 -->
               <div class="col-md-12" id="add_result"></div>
@@ -102,7 +102,7 @@
     <div class="row">
       <table class="table table-striped">
         <tr id="all_show_result">
-            <th>id</th><th>名前</th><th>メール</th><th>年齢</th>
+          <th>id</th><th>名前</th><th>メール</th><th>年齢</th>
         </tr>
       </table>
     </div>
