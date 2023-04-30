@@ -2,6 +2,9 @@ import { first } from 'lodash';
 import './bootstrap';
 //'use strict';
 
+/*************************
+ レコード全取得
+ ************************/
 function getAllData(){
 
     fetch('ajax/showAll', { // 第1引数に送り先
@@ -25,10 +28,12 @@ function getAllData(){
             console.log(error); // エラー表示
         })
 }
-
 // 関数を実行
 getAllData();
 
+/*************************
+ 指定したidのレコードを表示する
+ ************************/
 var ajax_show = document.getElementById("ajax_show");
 ajax_show.addEventListener('click', () => {
 
@@ -55,8 +60,11 @@ ajax_show.addEventListener('click', () => {
         });
 });
 
-var ajax_add = document.getElementById("ajax_add");
 
+/*************************
+ フォームからDB登録末う
+ ************************/
+var ajax_add = document.getElementById("ajax_add");
 ajax_add.addEventListener('click', () => {
 
     /*--------------------
@@ -74,7 +82,7 @@ ajax_add.addEventListener('click', () => {
       })
           .then(response => response.json()) // 返ってきたレスポンスをjsonで受け取って次のthenへ渡す
           .then(res => {
-              console.log('res: '+res[0].name); // やりたい処理
+              console.log('res: '+res[0].name);
               // やりたい処理
               document.getElementById("add_result").innerHTML = "<p>" + res[0].name + "が" + res[0].age + "のデータを登録しました。</p>";
 
