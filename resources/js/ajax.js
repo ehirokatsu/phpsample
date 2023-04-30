@@ -29,11 +29,8 @@ window.addEventListener('load', function () {
     */
     (async () => {
         try {
-            const response = await fetch('ajax/showAll');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');  // fetchが成功したかどうかの判定
-            }
-            const data = await response.json();
+            const data  = await(await fetch('ajax/showAll')).json();
+
             // 取得したレコードをeachで順次取り出す
             data.forEach(elm =>{
                 var insertHTML = "<tr class=\"target\"><td>" + elm['id'] + "</td><td>" + elm['name'] + "</td><td>"  + elm['mail'] + "</td><td>" + elm['age'] + "</td></tr>"
@@ -45,9 +42,6 @@ window.addEventListener('load', function () {
         }
         catch (e) {
             console.log(e);
-        }
-        finally {
-
         }
     })();
 });
