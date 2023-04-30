@@ -7,13 +7,13 @@ import './bootstrap';
  *************************************************/
 window.addEventListener('load', function () {
 
+    /*
     fetch('ajax/showAll', { // 第1引数に送り先
     })
     .then(response => response.json()) // 返ってきたレスポンスをjsonで受け取って次のthenへ渡す
     .then(res => {
-        /*--------------------
-            PHPからの受取成功
-            --------------------*/
+        //PHPからの受取成功
+
         // 取得したレコードをeachで順次取り出す
         res.forEach(elm =>{
             var insertHTML = "<tr class=\"target\"><td>" + elm['id'] + "</td><td>" + elm['name'] + "</td><td>"  + elm['mail'] + "</td><td>" + elm['age'] + "</td></tr>"
@@ -26,15 +26,37 @@ window.addEventListener('load', function () {
     .catch(error => {
         console.log(error); // エラー表示
     })
+    */
+    (async () => {
+        try {
+            const response = await fetch('ajax/showAll');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');  // fetchが成功したかどうかの判定
+            }
+            const data = await response.json();
+            // 取得したレコードをeachで順次取り出す
+            data.forEach(elm =>{
+                var insertHTML = "<tr class=\"target\"><td>" + elm['id'] + "</td><td>" + elm['name'] + "</td><td>"  + elm['mail'] + "</td><td>" + elm['age'] + "</td></tr>"
+                var all_show_result = document.getElementById("all_show_result");
+                all_show_result.insertAdjacentHTML('afterend', insertHTML);
+            })
+            console.log("通信成功");
+            console.log(data); // 返ってきたデータ
+        }
+        catch (e) {
+            console.log(e);
+        }
+        finally {
 
+        }
+    })();
 });
 
 
 /**************************************************
  指定したidのレコードを表示する
  *************************************************/
-var ajax_show = document.getElementById("ajax_show");
-ajax_show.addEventListener('click', () => {
+document.getElementById("ajax_show").addEventListener('click', () => {
 
     console.log("イベント発火");
 
@@ -63,8 +85,7 @@ ajax_show.addEventListener('click', () => {
 /**************************************************
  フォームからDB登録末う
  *************************************************/
-var ajax_add = document.getElementById("ajax_add");
-ajax_add.addEventListener('click', () => {
+document.getElementById("ajax_add").addEventListener('click', () => {
 
     /*--------------------
     POST送信
@@ -101,8 +122,7 @@ ajax_add.addEventListener('click', () => {
 /**************************************************
  指定したidのレコードを削除
  *************************************************/
-var ajax_del = document.getElementById("ajax_del");
-ajax_del.addEventListener('click', () => {
+document.getElementById("ajax_del").addEventListener('click', () => {
 
     console.log("イベント発火");
 
