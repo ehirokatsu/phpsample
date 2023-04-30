@@ -30,6 +30,7 @@
         <li><a href="/section" class="">section</a></li>
         <li><a href="/include-each" class="">include-each</a></li>
         <li><a href="/question" class="">question</a></li>
+        <li><a href="/ajax" class="">ajax</a></li>
       </ul>
     </nav>
   </div>
