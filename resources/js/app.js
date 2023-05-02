@@ -1,5 +1,5 @@
-import { first } from 'lodash';
-import './bootstrap';
+//import { first } from 'lodash';
+//import './bootstrap';
 //'use strict';
 
 //変数とコンソール出力
@@ -745,3 +745,47 @@ fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json')
     }
 })();
 
+
+//即時実行関数
+let testExe = (function () {
+    console.log('testexe');
+})();
+
+
+//$(function ( ) {
+
+
+//
+let testObject =( function () {
+    console.log('testObject');
+
+    let testObj = function ($num) {
+        console.log('testObj' + $num);
+        this.init();
+    };
+    testObj.prototype = {
+        init: function ( ) {
+            console.log('testObject2');
+        },
+    };
+
+    return testObj;
+})();
+
+
+let testIns = new testObject(10);
+//testIns();
+
+//});
+
+let ObjFunc = {
+    func1: function () {
+        console.log('ObjFunc');
+    },
+    func2: 'func2'
+};
+ObjFunc.func1();
+console.log(ObjFunc.func2);
+
+//let testObjFunc = new ObjFunc;
+//testObjFunc.func1;

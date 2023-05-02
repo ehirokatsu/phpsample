@@ -4,12 +4,16 @@
 
 //https://b-risk.jp/blog/2022/09/random-quiz/
 
-(function ($) {
 
+//即時実行関数
+//(function ($) {
+
+//ドキュメント準備完了イベント
+$(function () {
     //合計問題数
     let $questionTotalNum = 5;
 
-    //問題
+    //問題（オブジェクト形式）
     const prefecturalCapital = [
         {
           id: "01",
@@ -74,29 +78,33 @@
     //console.log(quizId);
 
     //現在の質問数
-    let $currentNum = 0;
+    let $currentQuestionNum = 0;
 
     //得点
     let $pointPerCorrect = 10;
 
+    //即時実行関数を使うとクラスのようになる
+    //Objがコンストラクタ、プロトタイプがメンバメソッドとなる
     let questionObject = (function () {
 
+        //コンストラクタ
         let Obj = function ($target) {
 
-            //質問の番号
+            //クイズの番号
             this.$questionNumber = $target.find('.quiz-question-number');
 
-            //質問文
+            //クイズの問題文
             this.$questionName = $target.find('.quiz-question');
 
             //選択肢ボタン
             this.$questionButton = $target.find('.quiz-button');
+            //選択肢1〜4
             this.$button01 = $target.find('.button01');
             this.$button02 = $target.find('.button02');
             this.$button03 = $target.find('.button03');
             this.$button04 = $target.find('.button04');
         
-            //選択肢のテキスト
+            //選択肢のテキスト文
             this.$answer01 = $target.find('.quiz-text01');
             this.$answer02 = $target.find('.quiz-text02');
             this.$answer03 = $target.find('.quiz-text03');
@@ -107,6 +115,7 @@
 
             this.init();
         };
+        //オブジェクトリテラルでプロトタイプを定義
         Obj.prototype = {
 
             init:function () {
@@ -121,7 +130,7 @@
                 $(window).on('load', function () {
 
                     //クイズID取得
-                    let value = quizId[$currentNum];
+                    let value = quizId[$currentQuestionNum];
 
                     //次の質問を取得
                     let nextQuestion = _this.searchQuestion(value);
@@ -145,7 +154,7 @@
            
                     $(this).addClass('is-checked');
            
-                    if ($currentNum + 1 == $questionTotalNum) {
+                    if ($currentQuestionNum + 1 == $questionTotalNum) {
                       setTimeout(function () {
                         $('.finish').addClass('is-show');
                         $('.score-wrap .score').text(score);
@@ -153,10 +162,10 @@
                     } else {
                       setTimeout(function () {
                         //現在の数字の更新
-                        $currentNum = $currentNum + 1;
+                        $currentQuestionNum = $currentQuestionNum + 1;
            
                         //次の質問番号を取得
-                        let value = quizId[$currentNum];
+                        let value = quizId[$currentQuestionNum];
            
                         //次の質問を取得
                         let nextQuestion = _this.searchQuestion(value);
@@ -197,7 +206,7 @@
                 _this.$questionName.text(nextQuestion.question);
 
                 //質問番号を1つ増やす
-                let numPlusOne = $currentNum + 1;
+                let numPlusOne = $currentQuestionNum + 1;
                 _this.$questionNumber.text('質問' + numPlusOne);
 
                 //選択肢のテキストの入れ替え
@@ -223,5 +232,5 @@
     if (quiz[0]) {
         let queInstance = new questionObject(quiz);
     }
-
-})(jQuery);
+});
+//})(jQuery);

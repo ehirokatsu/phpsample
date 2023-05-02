@@ -20,7 +20,7 @@
             <span class="ja">点</span>
             <span class="full">／50点</span>
           </div>
-          <a href="/" class="goback-button">最初からやり直す</a>
+          <a href="/quiz" class="goback-button">最初からやり直す</a>
         </div>
         <div class="quiz-question-number">質問1</div>
         <h2 class="quiz-question"></h2>
