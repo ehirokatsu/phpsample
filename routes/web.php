@@ -105,3 +105,8 @@ Route::get('/ajax/showAll', 'App\Http\Controllers\HelloController@showAjaxAll');
 Route::post('/ajax/show', 'App\Http\Controllers\HelloController@showAjax');
 Route::post('/ajax/add', 'App\Http\Controllers\HelloController@addAjax');
 Route::post('/ajax/del', 'App\Http\Controllers\HelloController@delAjax');
+
+//4択クイズアプリ
+Route::get('/quiz', function () {
+    return view('quiz');
+});
