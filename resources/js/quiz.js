@@ -1,15 +1,14 @@
-//import { first } from 'lodash';
-//import './bootstrap';
-//'use strict';
 
 //https://b-risk.jp/blog/2022/09/random-quiz/
 
 
 //即時実行関数
-//(function ($) {
+(function ($) {
 
 //ドキュメント準備完了イベント
-$(function () {
+//$(function () {
+//上記だと、$(window).on('load', function ()内が実行されず質問1がHTMLに反映されない。
+
     //合計問題数
     let $questionTotalNum = 5;
 
@@ -75,9 +74,8 @@ $(function () {
     }
     let quizId = ["01","02","03","04","05"];
     shuffleQuiz(quizId);
-    //console.log(quizId);
 
-    //現在の質問数
+    //現在のクイズ番号
     let $currentQuestionNum = 0;
 
     //得点
@@ -91,24 +89,25 @@ $(function () {
         let Obj = function ($target) {
 
             //クイズの番号
-            this.$questionNumber = $target.find('.quiz-question-number');
+            this.$questionNumberElement = $target.find('.quiz-question-number');
 
             //クイズの問題文
-            this.$questionName = $target.find('.quiz-question');
+            this.$questionSentenceElement = $target.find('.quiz-question');
 
             //選択肢ボタン
-            this.$questionButton = $target.find('.quiz-button');
+            this.$questionButtonElement = $target.find('.quiz-button');
+
             //選択肢1〜4
-            this.$button01 = $target.find('.button01');
-            this.$button02 = $target.find('.button02');
-            this.$button03 = $target.find('.button03');
-            this.$button04 = $target.find('.button04');
+            this.$button01Element = $target.find('.button01');
+            this.$button02Element = $target.find('.button02');
+            this.$button03Element = $target.find('.button03');
+            this.$button04Element = $target.find('.button04');
         
             //選択肢のテキスト文
-            this.$answer01 = $target.find('.quiz-text01');
-            this.$answer02 = $target.find('.quiz-text02');
-            this.$answer03 = $target.find('.quiz-text03');
-            this.$answer04 = $target.find('.quiz-text04');
+            this.$answer01Element = $target.find('.quiz-text01');
+            this.$answer02Element = $target.find('.quiz-text02');
+            this.$answer03Element = $target.find('.quiz-text03');
+            this.$answer04Element = $target.find('.quiz-text04');
 
             //score
             this.$score = $target.find('.score-wrap .score');
@@ -129,22 +128,23 @@ $(function () {
                 //ウインドウ読み込み時
                 $(window).on('load', function () {
 
-                    //クイズID取得
+                    //現在のクイズ番号からクイズIDを取得
                     let value = quizId[$currentQuestionNum];
 
-                    //次の質問を取得
-                    let nextQuestion = _this.searchQuestion(value);
+                    //最初のクイズオブジェクトを取得
+                    let firstQuestionObject = _this.searchQuestion(value);
 
-                    //次の質問に切り替える
-                    _this.changeQuestion(nextQuestion);
+                    //クイズの内容をHTMLにセットする
+                    _this.setQuestionToHtml(firstQuestionObject);
 
-                    //回答をシャッフルする
+                    //HTMLの選択肢をランダムにセットする
                     _this.shuffleAnswer($('.quiz-answer'));
                 });
 
-                //button クリック
-                this.$questionButton.on("click", function () {
+                //選択肢をクリックした時の処理
+                this.$questionButtonElement.on("click", function () {
  
+                    //クリックした選択肢がbutton01の正解だった場合
                     if ($(this).hasClass('button01')) {
                       $(this).parents('.quiz-answer').addClass('is-correct');
                       score = score + $pointPerCorrect;
@@ -161,23 +161,24 @@ $(function () {
                       }, 1000);
                     } else {
                       setTimeout(function () {
-                        //現在の数字の更新
+
+                        //現在のクイズ番号の更新
                         $currentQuestionNum = $currentQuestionNum + 1;
            
-                        //次の質問番号を取得
+                        //次のクイズIDを取得
                         let value = quizId[$currentQuestionNum];
            
                         //次の質問を取得
-                        let nextQuestion = _this.searchQuestion(value);
+                        let nextQuestionObject = _this.searchQuestion(value);
            
                         //次の質問に切り替える
-                        _this.changeQuestion(nextQuestion);
+                        _this.setQuestionToHtml(nextQuestionObject);
            
                         //クラスを取る
-                        _this.$questionButton.removeClass('is-checked');
+                        _this.$questionButtonElement.removeClass('is-checked');
                         $('.quiz-answer').removeClass('is-correct').removeClass('is-incorrect');
            
-                        //回答のシャッフル
+                        //回答をシャッフル
                         _this.shuffleAnswer($('.quiz-answer'));
            
                       }, 1000);
@@ -188,37 +189,54 @@ $(function () {
 
                 return false;
             },
+
+            //クイズIDからクイズオブジェクト（質問文と回答）を取得する
             searchQuestion: function (questionId) {
 
-                let nextQuestion = null;
+                //戻り値用変数の初期化
+                let QuestionObject = null;
+
+                //arrayオブジェクトが持つforeachメソッドを使用
+                //クイズIDに対応するクイズオブジェクトを取得する
                 prefecturalCapital.forEach(function (item) {
                     if (item.id == questionId) {
-                        nextQuestion = item;
+                        QuestionObject = item;
                     }
                 });
-                return nextQuestion;
+                return QuestionObject;
             },
-            changeQuestion: function (nextQuestion) {
+
+            //クイズオブジェクトからHTMLへ次のクイズ内容を反映する
+            setQuestionToHtml: function (nextQuestionObject) {
 
                 let _this = this;
 
-                //質問文の入れ替え
-                _this.$questionName.text(nextQuestion.question);
+                //クイズの質問文の入れ替え
+                _this.$questionSentenceElement.text(nextQuestionObject.question);
 
                 //質問番号を1つ増やす
-                let numPlusOne = $currentQuestionNum + 1;
-                _this.$questionNumber.text('質問' + numPlusOne);
+                _this.$questionNumberElement.text('質問' + ($currentQuestionNum + 1));
 
                 //選択肢のテキストの入れ替え
-                _this.$answer01.text(nextQuestion.answer01);
-                _this.$answer02.text(nextQuestion.answer02);
-                _this.$answer03.text(nextQuestion.answer03);
-                _this.$answer04.text(nextQuestion.answer04);
+                _this.$answer01Element.text(nextQuestionObject.answer01);
+                _this.$answer02Element.text(nextQuestionObject.answer02);
+                _this.$answer03Element.text(nextQuestionObject.answer03);
+                _this.$answer04Element.text(nextQuestionObject.answer04);
 
             },
+
+
+            //引数の要素の子要素をランダムで配置し直す
             shuffleAnswer: function (container) {
+
+                //引数の子要素を取得。この場合は4つの<li>となる。
                 let content = container.find("> *");
+
+                //<li>の個数。今回は4になる
                 let total = content.length;
+
+                //4つの<li>からランダムに1つを選択して<ul>の最初に追加する。
+                //これを<li>の数だけ（4回）繰り返す。
                 content.each(function () {
                     content.eq(Math.floor(Math.random() * total)).prependTo(container);
                 });
@@ -232,5 +250,5 @@ $(function () {
     if (quiz[0]) {
         let queInstance = new questionObject(quiz);
     }
-});
-//})(jQuery);
+//});
+})(jQuery);

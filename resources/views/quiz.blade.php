@@ -22,31 +22,31 @@
           </div>
           <a href="/quiz" class="goback-button">最初からやり直す</a>
         </div>
-        <div class="quiz-question-number">質問1</div>
+        <div class="quiz-question-number"></div>
         <h2 class="quiz-question"></h2>
         <ul class="quiz-answer">
           <li>
             <label for="" class="quiz-button button01">
               <input type="radio" name="radio" class="">
-              <span class="quiz-text01">札幌</span>
+              <span class="quiz-text01"></span>
             </label>
           </li>
           <li>
             <label for="" class="quiz-button button02">
               <input type="radio" name="radio" class="">
-              <span class="quiz-text02">函館</span>
+              <span class="quiz-text02"></span>
             </label>
           </li>
           <li>
             <label for="" class="quiz-button button03">
               <input type="radio" name="radio" class="">
-              <span class="quiz-text03">東京</span>
+              <span class="quiz-text03"></span>
             </label>
           </li>
           <li>
             <label for="" class="quiz-button button04">
               <input type="radio" name="radio" class="">
-              <span class="quiz-text04">大阪</span>
+              <span class="quiz-text04"></span>
             </label>
           </li>
         </ul>

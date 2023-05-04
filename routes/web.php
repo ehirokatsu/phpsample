@@ -110,3 +110,6 @@ Route::post('/ajax/del', 'App\Http\Controllers\HelloController@delAjax');
 Route::get('/quiz', function () {
     return view('quiz');
 });
+
+//メール送信
+Route::get('mail', 'App\Http\Controllers\MailSendController@index');
