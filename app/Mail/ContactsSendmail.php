@@ -60,6 +60,7 @@ class ContactsSendmail extends Mailable
                 'title' => $this->title,
                 'body' => $this->body,
             ],
+            text: 'contact.mail',
         );
     }
 
