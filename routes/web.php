@@ -113,3 +113,8 @@ Route::get('/quiz', function () {
 
 //メール送信
 Route::get('mail', 'App\Http\Controllers\MailSendController@index');
+
+//問い合わせフォーム
+Route::get('/contact', 'App\Http\Controllers\ContactsController@index')->name('contact.index');
+Route::post('/contact/confirm', 'App\Http\Controllers\ContactsController@confirm')->name('contact.confirm');
+Route::post('/contact/thanks', 'App\Http\Controllers\ContactsController@send')->name('contact.send');
