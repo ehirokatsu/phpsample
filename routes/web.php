@@ -118,3 +118,7 @@ Route::get('mail', 'App\Http\Controllers\MailSendController@index');
 Route::get('/contact', 'App\Http\Controllers\ContactsController@index')->name('contact.index');
 Route::post('/contact/confirm', 'App\Http\Controllers\ContactsController@confirm')->name('contact.confirm');
 Route::post('/contact/thanks', 'App\Http\Controllers\ContactsController@send')->name('contact.send');
+
+//sessionテスト
+Route::get('/session', 'App\Http\Controllers\SessionController@get')->name('session.get');
+Route::post('/session', 'App\Http\Controllers\SessionController@put')->name('session.put');
