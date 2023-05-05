@@ -1,7 +1,7 @@
 @extends('contact.layout')
 
-@section('title', '確認画面')
+@section('title', '送信完了画面')
 
 @section('content')
-{{ __('送信完了') }}
+<h1>送信完了</h1>
 @endsection
