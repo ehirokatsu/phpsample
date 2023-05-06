@@ -379,6 +379,7 @@ class HelloController extends Controller
         // 削除処理
         $count = \DB::table('people')->where('id',$id)->delete();
 
+        //削除したレコードを表示するため
         $personList = array();
         foreach ($people as $person) {
             $personList[] = array(
@@ -392,6 +393,7 @@ class HelloController extends Controller
 
         $people = \DB::table('people')->get();
 
+        //DBの全レコードを取得
         $personList_all = array();
         foreach ($people as $person) {
             $personList_all[] = array(
