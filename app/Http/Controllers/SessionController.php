@@ -21,4 +21,5 @@ class SessionController extends Controller
         $request->session()->put('msg', $msg);
         return redirect('session');
     }
+
 }

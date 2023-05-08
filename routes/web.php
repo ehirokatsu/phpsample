@@ -123,4 +123,5 @@ Route::post('/contact/thanks', 'App\Http\Controllers\ContactsController@send')->
 Route::get('/session', 'App\Http\Controllers\SessionController@get')->name('session.get');
 Route::post('/session', 'App\Http\Controllers\SessionController@put')->name('session.put');
 
-
+//csvダウンロード
+Route::get('/csv', 'App\Http\Controllers\CsvController@get')->name('csv.get');
