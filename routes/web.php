@@ -124,4 +124,8 @@ Route::get('/session', 'App\Http\Controllers\SessionController@get')->name('sess
 Route::post('/session', 'App\Http\Controllers\SessionController@put')->name('session.put');
 
 //csvダウンロード
-Route::get('/csv', 'App\Http\Controllers\CsvController@get')->name('csv.get');
+Route::get('/csvExport', 'App\Http\Controllers\CsvExportController@index')->name('csvExport.index');
+
+//csvインポート
+Route::get('/csvImport', 'App\Http\Controllers\CsvImportController@index')->name('csvImport.index');
+Route::get('/csvImport', 'App\Http\Controllers\CsvImportController@post')->name('csvImport.post');

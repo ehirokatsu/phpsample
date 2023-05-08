@@ -34,7 +34,7 @@
         <li><a href="/quiz" class="">4択クイズ</a></li>
         <li><a href="/contact" class="">問い合わせ</a></li>
         <li><a href="/session" class="">セッション</a></li>
-        <li><a href="/csv" class="">ダウンロード</a></li>
+        <li><a href="{{ route('csvExport.index') }}" class="">ダウンロード</a></li>
       </ul>
     </nav>
   </div>

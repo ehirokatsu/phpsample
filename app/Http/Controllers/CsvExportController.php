@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 
-class CsvController extends Controller
+class CsvExportController extends Controller
 {
     //php://tempを使用する方法
-    public function get () {
+    public function index () {
 
         //ストリームを書き込みモードで開く
         $stream = fopen('php://temp', 'w');
@@ -70,7 +70,7 @@ class CsvController extends Controller
     }
 
     //php://outputを使用する方法
-    public function get2 () {
+    public function index2 () {
         
         /************************************************************************
         ※Pragma：HTTP/1.0（HTTPの旧バージョン）のCache-Controlヘッダーを解さない場合に
