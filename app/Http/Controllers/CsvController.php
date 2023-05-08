@@ -23,7 +23,7 @@ class CsvController extends Controller
         ];    
 
         //1行目にカラム（列）名のみを書き込む（繰り返し処理には入れない）
-        fputcsv($stream, $arr);
+        fputcsv($stream, $columnsName);
 
         //書き込みたいデータを取得
         $people = DB::table('people')->select(['id', 'name', 'mail', 'age'])->get();
@@ -38,6 +38,7 @@ class CsvController extends Controller
                 $person->mail,
                 $person->age,
             ];
+            //1行分をストリームに書く
             fputcsv($stream, $csv);
         }
         
@@ -54,13 +55,16 @@ class CsvController extends Controller
         //ストリームを閉じる
         fclose($stream);                      
         
-        //ヘッダー情報を指定する
+        //ヘッダー情報を指定する（ダウンロード用の設定）
         $headers = array(
             'Content-Type' => 'text/csv',
             'Content-Disposition' => 'attachment; filename=test.csv'
         );
         
-        //ファイルをダウンロードする
+        //HTTPレスポンスを生成
+        //第1引数：コンテンツ
+        //第2引数：レスポンスステータス
+        //第3引数：レスポンスヘッダー
         return Response::make($csv, 200, $headers);
 
     }
