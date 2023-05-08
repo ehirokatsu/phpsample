@@ -128,4 +128,4 @@ Route::get('/csvExport', 'App\Http\Controllers\CsvExportController@index')->name
 
 //csvインポート
 Route::get('/csvImport', 'App\Http\Controllers\CsvImportController@index')->name('csvImport.index');
-Route::get('/csvImport', 'App\Http\Controllers\CsvImportController@post')->name('csvImport.post');
+Route::post('/csvImport', 'App\Http\Controllers\CsvImportController@post')->name('csvImport.post');

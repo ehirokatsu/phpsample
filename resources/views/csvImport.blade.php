@@ -4,11 +4,11 @@
 
 @section('content')
 <h1>CSVインポート</h1>
-<form action="/answer" method="post">
+<form action="{{ route('csvImport.post') }}" method="post" enctype="multipart/form-data">
   @csrf
-  A:<input type="radio" name="radioGroup" id="A" value="{{$A}}">
-  B:<input type="radio" name="radioGroup" id="B" value="{{$B}}">
-  <input type="submit" value="回答する">
+  <label for="" name="csvFile">CSVファイル</label>
+  <input type="file" name="csvFile" id="csvFile">
+  <input type="submit" value="">
 </form>
 @endsection
 
