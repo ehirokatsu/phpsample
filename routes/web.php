@@ -100,21 +100,21 @@ Route::get('/bm', function () {
 });
 
 //非同期通信アプリ
-Route::get('/ajax', 'App\Http\Controllers\HelloController@ajax');
-Route::get('/ajax/showAll', 'App\Http\Controllers\HelloController@showAjaxAll');
-Route::post('/ajax/show', 'App\Http\Controllers\HelloController@showAjax');
-Route::post('/ajax/add', 'App\Http\Controllers\HelloController@addAjax');
-Route::post('/ajax/del', 'App\Http\Controllers\HelloController@delAjax');
+Route::get('/ajax', 'App\Http\Controllers\AjaxController@ajax');
+Route::get('/ajax/showAll', 'App\Http\Controllers\AjaxController@showAjaxAll');
+Route::post('/ajax/show', 'App\Http\Controllers\AjaxController@showAjax');
+Route::post('/ajax/add', 'App\Http\Controllers\AjaxController@addAjax');
+Route::post('/ajax/del', 'App\Http\Controllers\AjaxController@delAjax');
 
 //4択クイズアプリ
 Route::get('/quiz', function () {
     return view('quiz');
 });
 
-//メール送信
+//メール送信（Mailファサードのみ使用）
 Route::get('mail', 'App\Http\Controllers\MailSendController@index');
 
-//問い合わせフォーム
+//問い合わせフォーム（Mailableクラスを使用）
 Route::get('/contact', 'App\Http\Controllers\ContactsController@index')->name('contact.index');
 Route::post('/contact/confirm', 'App\Http\Controllers\ContactsController@confirm')->name('contact.confirm');
 Route::post('/contact/thanks', 'App\Http\Controllers\ContactsController@send')->name('contact.send');
@@ -122,3 +122,5 @@ Route::post('/contact/thanks', 'App\Http\Controllers\ContactsController@send')->
 //sessionテスト
 Route::get('/session', 'App\Http\Controllers\SessionController@get')->name('session.get');
 Route::post('/session', 'App\Http\Controllers\SessionController@put')->name('session.put');
+
+

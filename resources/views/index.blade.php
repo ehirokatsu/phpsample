@@ -31,6 +31,9 @@
         <li><a href="/include-each" class="">include-each</a></li>
         <li><a href="/question" class="">question</a></li>
         <li><a href="/ajax" class="">ajax</a></li>
+        <li><a href="/quiz" class="">4択クイズ</a></li>
+        <li><a href="/contact" class="">問い合わせ</a></li>
+        <li><a href="/session" class="">セッション</a></li>
       </ul>
     </nav>
   </div>

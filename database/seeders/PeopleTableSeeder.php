@@ -6,6 +6,9 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+//factoryで使用
+use App\Models\Person;
+
 class PeopleTableSeeder extends Seeder
 {
     /**
@@ -15,6 +18,7 @@ class PeopleTableSeeder extends Seeder
      */
     public function run()
     {
+        /*
        $param = [
            'name' => 'taro',
            'mail' => 'taro@yamada.jp',
@@ -35,5 +39,9 @@ class PeopleTableSeeder extends Seeder
            'age' => 56,
        ];
        DB::table('people')->insert($param);
+*/
+       //factoryで3人のテストデータを生成
+       Person::factory()->count(3)->create();
+
     }
 }
