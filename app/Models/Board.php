@@ -28,4 +28,15 @@ class Board extends Model
         return $this->belongsTo('App\Models\Person');
     }
 
+    public function csvHeader(): array
+    {
+        return [
+            'id',
+            'person_id',
+            'title',
+            'message',
+        ];
+
+    }
+
 }
