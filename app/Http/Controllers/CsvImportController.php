@@ -16,6 +16,29 @@ class CsvImportController extends Controller
     public function post (Request $request)
     {
 
+        //アップロードしたCSVファイルのバリデーションと保存を行う
+        $newCsvFileName = $this->saveUploadFile($request);
+
+        //csvファイルをコレクション化する
+        $boards = $this->createCsvCollection($newCsvFileName);
+        
+        //データの重複チェックをする
+        $this->checkDuplicates($boards);
+
+        //コレクションを配列に変換してDBに挿入する
+        \DB::table('boards')->insert($boards->toArray());
+
+    }
+
+
+    /**************************************************
+     * HTTPリクエストからアップロードされたファイルを取得。
+     * 拡張子のチェックし保存する
+     * @param  $request　HTTPリクエスト。アップロードファイル情報のみ使用
+     * @return $newCsvFileName　保存したファイル名称
+     ************************************************/
+    public function saveUploadFile($request)
+    {
         //アップロードファイルの存在確認
         if ($request->hasFile('csvFile')) {
 
@@ -38,6 +61,16 @@ class CsvImportController extends Controller
 
         }
 
+        return $newCsvFileName;
+    }
+
+    /**************************************************
+     * 保存されているCSVファイルをコレクション化する。
+     * @param  $newCsvFileName　保存したファイル名称
+     * @return $boards　コレクション化したCSVファイル
+     ************************************************/
+    public function createCsvCollection ($newCsvFileName)
+    {
         //保存したファイルを取得する
         $csv = \Storage::disk('local')->get("public/csv/{$newCsvFileName}");
 
@@ -50,13 +83,13 @@ class CsvImportController extends Controller
 
         //boardテーブルのカラム
         $header = collect($board->csvHeader());
-
+        
         //アップロードしたCSVの1行目を取得しカンマで区切ってコレクション化する
-        $uploadedHeader = collect(explode(",", $uploadedData->shift()));
+        $uploadedHeader = collect(explode(",", $uploadedData->first()));
 
         if ($header->count() !== $uploadedHeader->count()) {
             
-            throw new Exception('Error: ヘッダーが一致しません');
+            throw new Exception('Error: カラムの数が一致しません');
 
         }
 
@@ -70,6 +103,18 @@ class CsvImportController extends Controller
             throw new Exception('Error: ヘッダーが一致しません');
         }
 
+        return $boards;
+
+    }
+
+
+    /**************************************************
+     * CSVファイル内の重複チェックと、DBとの重複チェックを行う
+     * @param  $boards　コレクション化したCSVファイル
+     * @return 無し
+     ************************************************/
+    public function checkDuplicates ($boards)
+    {
         //アップロードしたCSVにてidの重複チェック
         if ($boards->duplicates("id")->count() > 0) {
             throw new Exception("Error:idの重複：" . $boards->duplicates("id")->shift());
@@ -81,9 +126,5 @@ class CsvImportController extends Controller
         if ($duplicateBoard->count() > 0) {
             throw new Exception("Error:idの重複：" . $duplicateBoard->shift()->id);
         }
-
-        //コレクションを配列に変換してDBに挿入する
-        \DB::table('boards')->insert($boards->toArray());
-
     }
 }
