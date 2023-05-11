@@ -23,6 +23,17 @@ class HelloController extends Controller
     //ホーム画面
     public function index(Request $request,Response $response, $id=0, $tmp=1)
     {
+        $value = [10, 30, 50, 100];
+        \Debugbar::addMessage($value);
+        \Debugbar::info($request);
+
+        $exception = new Exception('Error Hoge Hoge');
+        try {
+            throw $exception;
+        } catch(Exception $e) {
+            \Debugbar::addThrowable($e);
+        }
+
         return view('index');
     }
 
