@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Board;
+use Exception;
 
 class CsvImportController extends Controller
 {
@@ -42,13 +43,17 @@ class CsvImportController extends Controller
         //アップロードファイルの存在確認
         if ($request->hasFile('csvFile')) {
 
+            try {
             //ファイル拡張子がcsvか確認
             if ($request->csvFile->getClientOriginalExtension() !== "csv") {
 
                 throw new Exception('不適切な拡張子です。');
 
             }
-
+        }
+        catch (Exception $e) {
+            return view('csvImport');
+        }
             //ファイル名を取得
             $newCsvFileName = $request->csvFile->getClientOriginalName();
 

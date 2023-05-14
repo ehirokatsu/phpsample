@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Person;
 use App\Http\Myclass\Util;
 use App\Http\Services\HelloService;
+use Exception;
 
 class HelloController extends Controller
 {
@@ -27,9 +28,8 @@ class HelloController extends Controller
         \Debugbar::addMessage($value);
         \Debugbar::info($request);
 
-        $exception = new Exception('Error Hoge Hoge');
         try {
-            throw $exception;
+            throw new Exception('Error Hoge Hoge');
         } catch(Exception $e) {
             \Debugbar::addThrowable($e);
         }
@@ -141,7 +141,7 @@ class HelloController extends Controller
     //insert用ビュー
     public function add(Request $request)
     {
-        return view('/add');
+        return view('add');
     }
  
     //insert実行
@@ -270,7 +270,7 @@ class HelloController extends Controller
         Person::find($request->id)->delete();
 
         //共通
-        return redirect('/index_db');
+        return redirect('index_db');
     }
 
     //検索用ビュー
