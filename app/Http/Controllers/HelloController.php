@@ -34,6 +34,9 @@ class HelloController extends Controller
             \Debugbar::addThrowable($e);
         }
 
+        \Log::debug('testlog');
+        \Log::info('test', ['foo' => 'bar']);
+
         return view('index');
     }
 

@@ -122,6 +122,8 @@ Route::post('/contact/thanks', 'App\Http\Controllers\ContactsController@send')->
 //sessionテスト
 Route::get('/session', 'App\Http\Controllers\SessionController@get')->name('session.get');
 Route::post('/session', 'App\Http\Controllers\SessionController@put')->name('session.put');
+Route::post('/session', 'App\Http\Controllers\SessionController@put')->name('session.put');
+Route::delete('/{id}', 'App\Http\Controllers\SessionController@destroy')->where('id', '[0-9]+');
 
 //csvダウンロード
 Route::get('/csvExport', 'App\Http\Controllers\CsvExportController@index')->name('csvExport.index');
