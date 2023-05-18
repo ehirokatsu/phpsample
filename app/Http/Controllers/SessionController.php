@@ -9,21 +9,13 @@ class SessionController extends Controller
     //
     public function get (Request $request) {
 
+
+        $array = [10,11,12];
+        //dd(isset($array[3]));
+
        //$request->session()->forget('cart');
         //セッションから値を取得
         $cart = $request->session()->get('cart');
-/*
-        if (empty($cart)) {
-            $cart = [
-            [
-            'id' => '',
-            'num' => '',
-            ]
-        ];
-        }
-        */
-        //dd( $array);
-
 
         return view('session', ['session_data' => $cart]);
         //return view('session');
@@ -75,21 +67,16 @@ class SessionController extends Controller
 
 
         $index = $this->searchValue($cart, $id);
-//dd($index);
 
-        
-
-        //isset(false)だとtrueになって先頭要素が削除されてしまう。
-        //index != falseだと、index=0の時はfalseとなって削除されない
-        if (isset($cart[$index]) || $index !== false) {
+        //$cart[false]だと$cart[0]と同じ意味になる。よって先頭要素が削除されてしまう。
+        //index !== falseを加えてはじくようにする。
+        if (isset($cart[$index]) && $index !== false) {
             unset($cart[$index]);
         }
         $cart = array_values($cart);
-        //dd($cart);
 
         //カートをsessionに保存する
         $request->session()->put('cart', $cart);
-
 
         return redirect('session');
         
