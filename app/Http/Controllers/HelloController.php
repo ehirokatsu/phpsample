@@ -11,6 +11,9 @@ use App\Http\Myclass\Util;
 use App\Http\Services\HelloService;
 use Exception;
 
+use App\Events\testEvent;
+
+
 class HelloController extends Controller
 {
     protected $helloService;
@@ -36,6 +39,9 @@ class HelloController extends Controller
 
         \Log::debug('testlog');
         \Log::info('test', ['foo' => 'bar']);
+
+        //イベント発火。Userクラス等を渡したいときは引数にセットする
+        event(new testEvent());
 
         return view('index');
     }

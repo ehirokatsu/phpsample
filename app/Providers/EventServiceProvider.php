@@ -7,6 +7,10 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
+//追加
+use App\Events\testEvent;
+use App\Listeners\testListener;
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -18,6 +22,13 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        
+        //イベントクラスとリスナークラスを関連づけ
+        testEvent::class => [
+            testListener::class,
+        ],
+        
+        
     ];
 
     /**
@@ -37,6 +48,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function shouldDiscoverEvents()
     {
+        //trueにすることで、上記の関連付けを行わなくても自動で関連づけできる。
         return false;
     }
 }
